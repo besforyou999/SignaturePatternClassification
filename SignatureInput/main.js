@@ -3,6 +3,7 @@ if (window.addEventListener) {
 }
 
 var canvas, context ,tool, finishBtn, clearBtn;
+var vectorArr = [], coord = [];
 
 function InitEvent() {
     canvas = document.getElementById('canvas');
@@ -29,12 +30,16 @@ function tool_pencil() {
         context.beginPath();
         context.moveTo(e._x, e._y);
         tool.started = true;
+
+        coord.push([e._x, e._y]);
     };
 
     this.mousemove = function(e) {
         if (tool.started) {
             context.lineTo(e._x, e._y);
             context.stroke();
+
+            coord.push([e._x, e._y]);
         }
     };
 
@@ -86,6 +91,10 @@ function onClear() {
 
 function saveDataPoints() {
 
-    alert("Hi");
+    vectorArr.push(coord);
+    coord = [];
+    onClear();
+
+    alert(vectorArr.length);
 
 }
