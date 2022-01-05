@@ -101,6 +101,4 @@ function saveDataPoints() {
 
     alert(vectorArr.length);
 
-    
-
 }
