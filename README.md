@@ -1,4 +1,4 @@
-# Signature Pattern Classification <br> 수기 서명 패턴 분류
+# Signature Pattern Classification
 
 
 
@@ -6,4 +6,7 @@
 
 <br>
 
-> 머신러닝을 활용하여 서명이 **숫자인지, 한글인지, 영문인지** 분류해주는 분류기입니다.
+> 머신러닝을 활용하여 서명이 숫자인지, 한글인지, 영문인지 분류해주는 **수기 서명 패턴 분류기**입니다.
+
+<br>
+
