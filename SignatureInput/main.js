@@ -91,10 +91,16 @@ function onClear() {
 
 function saveDataPoints() {
 
+   for (let i = 0 ; i < coord.length ; i++) {
+       console.log(coord[i]);
+   }
+
     vectorArr.push(coord);
     coord = [];
     onClear();
 
     alert(vectorArr.length);
+
+    
 
 }
