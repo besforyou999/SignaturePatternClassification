@@ -11,10 +11,32 @@
             <canvas id ='canvas' width='300' height='300'> Canvas not supported </canvas>
         </div>
     
-        <button class = "finish" id = 'finishBtn'>입력 완료</button>
-        <button class = "clear" id = 'clearBtn'>Screen Clear</button>
+        <div>
+            <form>
 
+                <input type = 'radio' id = 'unknown' value ='0' name = 'classify' checked>
+                <label for='unknown'>unknown</label>
+                
+                <input type = 'radio' id = 'number' value ='1' name = 'classify'>
+                <label for='Number'>Number</label>
+    
+                <input type = 'radio' id = 'korean' value ='2' name = 'classify'>
+                <label for='Korean'>Korean</label>
+    
+                <input type = 'radio' id = 'english' value ='3' name = 'classify'>
+                <label for='English'>English</label>
+                
+            </form>>
+        </div>
+      
+        <div>
+            <button class = "finish" id = 'finishBtn'>입력 완료</button>
+            <button class = "clear" id = 'clearBtn'>Screen Clear</button>
+
+        </div>
+      
         <script src='main.js'></script>
 
+    
     </body>
 </html>

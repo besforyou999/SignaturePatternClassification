@@ -2,13 +2,15 @@ if (window.addEventListener) {
     window.addEventListener('load', InitEvent, false);
 }
 
+var form; // for radiobtn
 var canvas, context ,tool, finishBtn, clearBtn;
-var vectorArr = [], coord = [];
+var SignatureData = [], coord = [];
 
 function InitEvent() {
-    canvas = document.getElementById('canvas');
-    context = canvas.getContext('2d');
-    clearBtn = document.getElementById('clearBtn');
+    form      = document.querySelector("form");
+    canvas    = document.getElementById('canvas');
+    context   = canvas.getContext('2d');
+    clearBtn  = document.getElementById('clearBtn');
     finishBtn = document.getElementById('finishBtn');
 
     tool = new tool_pencil();
@@ -19,7 +21,8 @@ function InitEvent() {
     canvas.addEventListener('touchmove', ev_canvas, false);
     canvas.addEventListener('touchend', ev_canvas, false);
     clearBtn.addEventListener('click',  onClear);
-    finishBtn.addEventListener('click', saveDataPoints);
+    finishBtn.addEventListener('click', save);
+
 }
 
 function tool_pencil() {
@@ -89,16 +92,25 @@ function onClear() {
 	context.restore();
 }
 
-function saveDataPoints() {
+function save() {
 
-   for (let i = 0 ; i < coord.length ; i++) {
-       console.log(coord[i]);
-   }
+    var sigInfo = [];
 
-    vectorArr.push(coord);
+    // insert coord
+    sigInfo.push(coord);
     coord = [];
+
+    // insert label data
+    var data = new FormData(form);
+    var output;
+    for (const entry of data) {
+        output = entry[1];
+    };
+    sigInfo.push(output);
+
+    SignatureData.push(sigInfo);
+
     onClear();
 
-    alert(vectorArr.length);
 
 }
