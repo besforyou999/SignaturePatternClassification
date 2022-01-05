@@ -8,6 +8,7 @@ function InitEvent() {
     canvas = document.getElementById('canvas');
     context = canvas.getContext('2d');
     clearBtn = document.getElementById('clearBtn');
+    finishBtn = document.getElementById('finishBtn');
 
     tool = new tool_pencil();
     canvas.addEventListener('mousedown', ev_canvas, false);
@@ -16,8 +17,8 @@ function InitEvent() {
     canvas.addEventListener('touchstart', ev_canvas, false);
     canvas.addEventListener('touchmove', ev_canvas, false);
     canvas.addEventListener('touchend', ev_canvas, false);
-    clearBtn.addEventListener('click',  printAlert);
-
+    clearBtn.addEventListener('click',  onClear);
+    finishBtn.addEventListener('click', saveDataPoints);
 }
 
 function tool_pencil() {
@@ -79,14 +80,12 @@ function ev_canvas(ev) {
 }
 
 function onClear() {
-    canvas = document.getElementById('Canvas');
-    context.save();
-	context.setTransform(1, 0, 0, 1, 0, 0);
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	context.restore();
 }
 
-function printAlert() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-	context.restore();
+function saveDataPoints() {
+
+    alert("Hi");
+
 }
