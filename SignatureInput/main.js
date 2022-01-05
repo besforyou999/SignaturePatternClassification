@@ -1,8 +1,29 @@
+/*
+배열 SignatureData의 한 원소가 가지고 있는 데이터 ( 인덱스 순 )
+
+서명의 검은색 선이 이루는 좌표값 배열, 서명의 분류, 서명의 URL
+
+- 좌표값 배열 
+
+    좌표값 배열의 한 원소는 x,y 좌표이고 길이 2인 정수형 배열로 이루어져있다.
+    x, y값은 정수(int)이고 범위는 0 이상 300 이하
+
+- 서명의 분류
+
+    정수값 0,1,2,3 중 하나로 되어있다.
+    0 == unknown , 1 == Number , 2 == Korean, 3 == English
+
+- 서명의 URL
+
+    서명의 이미지가 URL로 저장 되어있다. ( type은 string )
+*/
+
+
 if (window.addEventListener) {
     window.addEventListener('load', InitEvent, false);
 }
 
-var form; // for radiobtn
+var form; 
 var canvas, context ,tool, finishBtn, clearBtn;
 var SignatureData = [], coord = [];
 
@@ -22,7 +43,6 @@ function InitEvent() {
     canvas.addEventListener('touchend', ev_canvas, false);
     clearBtn.addEventListener('click',  onClear);
     finishBtn.addEventListener('click', save);
-
 }
 
 function tool_pencil() {
@@ -96,21 +116,22 @@ function save() {
 
     var sigInfo = [];
 
-    // insert coord
-    sigInfo.push(coord);
-    coord = [];
-
-    // insert label data
+    sigInfo.push(coord);                // 검은색 선의 좌표값들을 저장
+    
     var data = new FormData(form);
     var output;
     for (const entry of data) {
         output = entry[1];
     };
-    sigInfo.push(output);
+    
+    sigInfo.push(Number(output));       // 분류를 정수형 데이터로 저장
+
+    sigInfo.push(canvas.toDataURL());   // 서명 데이터의 URL 저장
+
 
     SignatureData.push(sigInfo);
 
+    //console.log(SignatureData[SignatureData.length - 1]);
+    coord = [];
     onClear();
-
-
 }
