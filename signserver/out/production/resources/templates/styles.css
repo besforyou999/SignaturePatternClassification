@@ -1,0 +1,27 @@
+body {
+    background-color: lightgray;
+    
+}
+
+.radioBtn {
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.finish {
+    margin-left: 20px;
+    font-size: 20px;
+    padding: 10px 10px;
+}
+
+.clear {
+    margin-left: 10px;
+    font-size: 20px;
+    padding: 10px 10px;
+}
+
+#canvas {
+    margin: 20px;
+    background:white;
+    border: thin solid #aaaaaa;
+}
