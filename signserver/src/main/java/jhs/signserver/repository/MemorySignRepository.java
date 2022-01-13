@@ -10,6 +10,7 @@ public class MemorySignRepository implements SignRepository{
 
     private static Map<Long, Sign> store = new HashMap<>();
     private static long sequence = 0L;
+
     @Override
     public Sign save(Sign sign) {
         sign.setId(++sequence);
@@ -26,7 +27,6 @@ public class MemorySignRepository implements SignRepository{
     public List<Sign> findAll() {
         return new ArrayList<>(store.values());
     }
-
 
     public void clearStore(){
         store.clear();
