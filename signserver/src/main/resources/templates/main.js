@@ -133,5 +133,5 @@ function save() {
 
     //console.log(SignatureData[SignatureData.length - 1]);
     coord = [];
-    onClear();
+    //onClear();
 }

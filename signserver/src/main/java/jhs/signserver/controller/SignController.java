@@ -19,5 +19,12 @@ public class SignController {
         this.signService = signService;
     }
 
-
+    @PostMapping("/test")
+    public String createTest(SignForm signForm) {
+        Sign sign = new Sign();
+        sign.setImgLink(signForm.getName());
+        signService.register(sign);
+        System.out.println(signForm.getName());
+        return "redirect:/";
+    }
 }
