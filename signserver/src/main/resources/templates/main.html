@@ -2,14 +2,43 @@
 <meta charset="utf-8">
     <head>
         <title>JHS Signature Input</title>
-        <link rel="stylesheet" href="styles.css">
+        <!-- <link rel="stylesheet" href="styles.css"> -->
+        <style>
+            body {
+                background-color: lightgray;
+            }
+
+            .radioBtn {
+                margin-left: 15px;
+                margin-bottom: 15px;
+            }
+
+            .clear {
+                margin-left: 10px;
+                font-size: 20px;
+                padding: 10px 10px;
+            }
+
+            .inputBox {
+                margin-left: 10px;
+                //padding: 20px;
+            }
+
+            #canvas {
+                margin: 20px;
+                background:white;
+                border: thin solid #aaaaaa;
+            }
+        </style>
+
     </head>
     <body>
-        <div>
-            <canvas id ='canvas' width='300' height='300'>
-                Canvas not supported
-            </canvas>
-        </div>
+
+    <div>
+        <canvas id ='canvas' width='300' height='300'>
+            Canvas not supported
+        </canvas>
+    </div>
 
     <div>
         <form>
@@ -31,10 +60,11 @@
         </form>
     </div>
 
-    <div>
-        <button class = "finish" id = 'finishBtn'>입력 완료</button>
-        <button class = "clear" id = 'clearBtn'>Screen Clear</button>
-    </div>
+    <form action="test.jsp" method="post">
+        <button class = "clear"  id = 'SaveBtn' type="submit">Save </button>
+        <button class = "clear" id = 'ClearBtn'>Screen Clear</button>
+        <input  class = "inputBox" type="text" id="name" name="name" placeholder="type name" >
+    </form>
 
     <script src='main.js'></script>
 
