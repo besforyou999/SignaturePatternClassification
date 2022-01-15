@@ -31,8 +31,8 @@ function InitEvent() {
     form      = document.querySelector("form");
     canvas    = document.getElementById('canvas');
     context   = canvas.getContext('2d');
-    clearBtn  = document.getElementById('clearBtn');
-    finishBtn = document.getElementById('finishBtn');
+    clearBtn  = document.getElementById('ClearBtn');
+    //finishBtn = document.getElementById('finishBtn');
 
     tool = new tool_pencil();
     canvas.addEventListener('mousedown', ev_canvas, false);
@@ -42,7 +42,7 @@ function InitEvent() {
     canvas.addEventListener('touchmove', ev_canvas, false);
     canvas.addEventListener('touchend', ev_canvas, false);
     clearBtn.addEventListener('click',  onClear);
-    finishBtn.addEventListener('click', save);
+    //finishBtn.addEventListener('click', save);
 }
 
 function tool_pencil() {
@@ -131,7 +131,6 @@ function save() {
 
     SignatureData.push(sigInfo);
 
-    //console.log(SignatureData[SignatureData.length - 1]);
+
     coord = [];
-    onClear();
 }
