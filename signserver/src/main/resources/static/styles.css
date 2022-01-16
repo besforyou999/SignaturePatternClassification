@@ -9,13 +9,13 @@ body {
 }
 
 .save {
-    margin-left: 20px;
+    margin: 10px;
     font-size: 20px;
     padding: 10px 10px;
 }
 
 .clear {
-    margin-left: 10px;
+    margin-left : 10px;
     font-size: 20px;
     padding: 10px 10px;
 }

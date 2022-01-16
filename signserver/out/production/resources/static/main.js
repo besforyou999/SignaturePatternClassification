@@ -24,7 +24,7 @@ if (window.addEventListener) {
 }
 
 var form; 
-var canvas, context ,tool, finishBtn, clearBtn;
+var canvas, context ,tool, saveBtn, clearBtn;
 var SignatureData = [], coord = [];
 
 function InitEvent() {
@@ -32,7 +32,7 @@ function InitEvent() {
     canvas    = document.getElementById('canvas');
     context   = canvas.getContext('2d');
     clearBtn  = document.getElementById('ClearBtn');
-    //finishBtn = document.getElementById('finishBtn');
+    saveBtn   = document.getElementById('SaveBtn');
 
     tool = new tool_pencil();
     canvas.addEventListener('mousedown', ev_canvas, false);
@@ -42,7 +42,7 @@ function InitEvent() {
     canvas.addEventListener('touchmove', ev_canvas, false);
     canvas.addEventListener('touchend', ev_canvas, false);
     clearBtn.addEventListener('click',  onClear);
-    //finishBtn.addEventListener('click', save);
+    saveBtn.addEventListener('click', save);
 }
 
 function tool_pencil() {
@@ -114,23 +114,17 @@ function onClear() {
 
 function save() {
 
-    var sigInfo = [];
+    var imgUrl = canvas.toDataURL();
+    var num;
+    var objLen = document.getElementsByName('classify').length;
+    for (var i = 0 ; i < objLen ; i++) {
+        var curObj = document.getElementsByName('classify')[i];
+        if (curObj.checked == true) {
+            num = String(curObj.value);
+            break;
+        }
+    }
 
-    sigInfo.push(coord);                // 검은색 선의 좌표값들을 저장
-    
-    var data = new FormData(form);
-    var output;
-    for (const entry of data) {
-        output = entry[1];
-    };
-    
-    sigInfo.push(Number(output));       // 분류를 정수형 데이터로 저장
+    if (confirm("confirm send data?")) location.href = "/sendImgURL?imgURL=" + imgUrl + "&number=" + num;
 
-    sigInfo.push(canvas.toDataURL());   // 서명 데이터의 URL 저장
-
-
-    SignatureData.push(sigInfo);
-
-
-    coord = [];
 }

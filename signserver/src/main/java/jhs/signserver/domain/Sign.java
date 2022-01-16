@@ -5,9 +5,9 @@ import java.sql.Date;
 public class Sign {
     private Long id;
     // private Json data?
-    private String imgLink;
-    private int type;
-    private Date created;
+    private String imgLink; // img URL
+    private int type;       // 0 == number, 1 == Number, 2 == Korean, 3 == English
+    private Date created;   // create date
 
     public Long getId() {
         return id;

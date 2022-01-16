@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.text.SimpleDateFormat;
 
 @Controller
 public class SignController {
@@ -19,12 +23,24 @@ public class SignController {
         this.signService = signService;
     }
 
-    @PostMapping("/test")
-    public String createTest(SignForm signForm) {
+
+    @GetMapping("/sendImgURL")
+    public String sendURL(String imgURL , String number) {
         Sign sign = new Sign();
-        sign.setImgLink(signForm.getName());
+        // img URL
+        sign.setImgLink(imgURL);
+
+        // Creation date
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String ss = sdf.format(new java.util.Date());
+        sign.setCreated(java.sql.Date.valueOf(ss));
+        System.out.println(ss);
+        // img type
+        sign.setType(Integer.parseInt(number));
+        System.out.println(number);
         signService.register(sign);
-        System.out.println(signForm.getName());
         return "redirect:/";
     }
+
+
 }
