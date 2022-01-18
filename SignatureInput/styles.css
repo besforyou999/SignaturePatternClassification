@@ -1,12 +1,6 @@
-body {
-    background-color: lightgray;
-    
-}
+body { background-color: lightgray; }
 
-.radioBtn {
-    margin-left: 15px;
-    margin-bottom: 15px;
-}
+.radioBtn { margin-left: 20px; }
 
 .finish {
     margin-left: 20px;
