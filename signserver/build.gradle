@@ -16,10 +16,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	/*implementation 'org.springframework.boot:spring-boot-starter-jdbc'*/
 	implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
 
-	runtimeOnly 'com.h2database:h2'
+	//driver 연결이 안돼서 서버가 실행이 안되는거 같아여~ 빠른 시일내에 조치할게요 ㅎㅎ;
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
+
+	//runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
