@@ -18,6 +18,7 @@
     서명의 이미지가 URL로 저장 되어있다. ( type은 string )
 */
 
+
 if (window.addEventListener) {
     window.addEventListener('load', InitEvent, false);
 }
