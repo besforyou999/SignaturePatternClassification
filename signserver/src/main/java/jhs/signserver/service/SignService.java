@@ -1,7 +1,6 @@
 package jhs.signserver.service;
 
 import jhs.signserver.domain.Sign;
-import jhs.signserver.repository.MemorySignRepository;
 import jhs.signserver.repository.SignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public class SignService {
 
     private final SignRepository signRepository ;
