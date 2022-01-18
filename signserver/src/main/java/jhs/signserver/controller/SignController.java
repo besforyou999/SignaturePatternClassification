@@ -1,7 +1,6 @@
 package jhs.signserver.controller;
 
 import jhs.signserver.domain.Sign;
-import jhs.signserver.repository.MemorySignRepository;
 import jhs.signserver.repository.SignRepository;
 import jhs.signserver.service.SignService;
 import org.springframework.beans.factory.annotation.Autowired;
