@@ -19,7 +19,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.1'
 
-	runtimeOnly 'com.h2database:h2'
+	//runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
