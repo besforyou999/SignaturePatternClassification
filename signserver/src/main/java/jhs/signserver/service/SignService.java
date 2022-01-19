@@ -1,20 +1,18 @@
 package jhs.signserver.service;
 
 import jhs.signserver.domain.Sign;
-import jhs.signserver.repository.MemorySignRepository;
 import jhs.signserver.repository.SignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-
-@Service
+@Transactional
 public class SignService {
 
     private final SignRepository signRepository ;
 
-    @Autowired
     public SignService(SignRepository signRepository) {
         this.signRepository = signRepository;
     }

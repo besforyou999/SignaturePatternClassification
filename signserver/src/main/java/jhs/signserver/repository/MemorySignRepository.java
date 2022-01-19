@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository
+//@Repository
 public class MemorySignRepository implements SignRepository{
 
     private static Map<Long, Sign> store = new HashMap<>();

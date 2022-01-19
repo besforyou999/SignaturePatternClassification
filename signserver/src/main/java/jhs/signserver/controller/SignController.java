@@ -1,7 +1,6 @@
 package jhs.signserver.controller;
 
 import jhs.signserver.domain.Sign;
-import jhs.signserver.repository.MemorySignRepository;
 import jhs.signserver.repository.SignRepository;
 import jhs.signserver.service.SignService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +24,11 @@ public class SignController {
 
 
     @GetMapping("/sendImgURL")
+    @PostMapping("/sendImgURL")
     public String sendURL(String imgURL , String number) {
         Sign sign = new Sign();
         // img URL
-        sign.setImgLink(imgURL);
+        sign.setData(imgURL);
 
         // Creation date
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -36,7 +36,7 @@ public class SignController {
         sign.setCreated(java.sql.Date.valueOf(ss));
         System.out.println(ss);
         // img type
-        sign.setType(Integer.parseInt(number));
+        sign.setLabel(Integer.parseInt(number));
         System.out.println(number);
         signService.register(sign);
         return "redirect:/";
