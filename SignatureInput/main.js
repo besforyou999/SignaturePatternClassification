@@ -22,7 +22,7 @@ if (window.addEventListener) {
     window.addEventListener('load', InitEvent, false);
 }
 
-var form; 
+var form, image; 
 var canvas, context ,tool, finishBtn, clearBtn;
 var SignatureData = [], coord = [];
 
@@ -32,6 +32,7 @@ function InitEvent() {
     context   = canvas.getContext('2d');
     clearBtn  = document.getElementById('clearBtn');
     finishBtn = document.getElementById('finishBtn');
+    image     = document.getElementById('image');
 
     tool = new tool_pencil();
     canvas.addEventListener('mousedown', ev_canvas, false);
@@ -113,6 +114,8 @@ function onClear() {
 
 function save() {
 
+    console.log(canvas.toDataURL());
+
     var sigInfo = [];
 
     sigInfo.push(coord);                // 검은색 선의 좌표값들을 저장
@@ -130,7 +133,7 @@ function save() {
 
     SignatureData.push(sigInfo);
 
-    //console.log(SignatureData[SignatureData.length - 1]);
     coord = [];
+
     onClear();
 }

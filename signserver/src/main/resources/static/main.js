@@ -115,6 +115,7 @@ function onClear() {
 function save() {
 
     var imgUrl = canvas.toDataURL();
+    console.log(imgUrl);
     var num;
     var objLen = document.getElementsByName('classify').length;
     for (var i = 0 ; i < objLen ; i++) {
@@ -125,6 +126,7 @@ function save() {
         }
     }
 
-    if (confirm("confirm send data?")) location.href = "/sendImgURL?imgURL=" + imgUrl + "&number=" + num;
+    if (confirm("confirm send data?"))
+        location.href = "/sendImgURL?imgURL=" + imgUrl + "&number=" + num;
 
 }

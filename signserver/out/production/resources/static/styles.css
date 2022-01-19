@@ -1,6 +1,5 @@
 body {
     background-color: lightgray;
-    
 }
 
 .radioBtn {
@@ -15,6 +14,12 @@ body {
 }
 
 .clear {
+    margin-left : 10px;
+    font-size: 20px;
+    padding: 10px 10px;
+}
+
+.read {
     margin-left : 10px;
     font-size: 20px;
     padding: 10px 10px;
