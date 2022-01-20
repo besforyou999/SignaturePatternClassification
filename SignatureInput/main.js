@@ -32,7 +32,7 @@ function InitEvent() {
     context   = canvas.getContext('2d');
     clearBtn  = document.getElementById('clearBtn');
     finishBtn = document.getElementById('finishBtn');
-    image     = document.getElementById('image');
+    image     = document.getElementById('img');
 
     tool = new tool_pencil();
     canvas.addEventListener('mousedown', ev_canvas, false);
@@ -114,7 +114,9 @@ function onClear() {
 
 function save() {
 
-    console.log(canvas.toDataURL());
+    var imgUrl = canvas.toDataURL();
+    console.log(imgUrl);
+    image.src = imgUrl;
 
     var sigInfo = [];
 

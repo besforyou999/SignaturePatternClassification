@@ -23,16 +23,17 @@ if (window.addEventListener) {
     window.addEventListener('load', InitEvent, false);
 }
 
-var form; 
+var form, image;
 var canvas, context ,tool, saveBtn, clearBtn;
 var SignatureData = [], coord = [];
 
 function InitEvent() {
-    form      = document.querySelector("form");
-    canvas    = document.getElementById('canvas');
-    context   = canvas.getContext('2d');
-    clearBtn  = document.getElementById('ClearBtn');
-    saveBtn   = document.getElementById('SaveBtn');
+    form        = document.querySelector("form");
+    canvas      = document.getElementById('canvas');
+    context     = canvas.getContext('2d');
+    clearBtn    = document.getElementById('ClearBtn');
+    saveBtn     = document.getElementById('SaveBtn');
+    image       = document.getElementById('img');
 
     tool = new tool_pencil();
     canvas.addEventListener('mousedown', ev_canvas, false);
@@ -114,8 +115,10 @@ function onClear() {
 
 function save() {
 
-    var imgUrl = canvas.toDataURL();
+    var imgUrl = canvas.toDataURL(); // typeof imgUrl == string
+    image.src = imgUrl;
     console.log(imgUrl);
+
     var num;
     var objLen = document.getElementsByName('classify').length;
     for (var i = 0 ; i < objLen ; i++) {
@@ -126,7 +129,9 @@ function save() {
         }
     }
 
-    if (confirm("confirm send data?"))
-        location.href = "/sendImgURL?imgURL=" + imgUrl + "&number=" + num;
+    if (!confirm("confirm send data?")) {
+        location.href = "/sendImgURL?imgURL=" + imgUrl  + "&number=" + num;
+    }
+
 
 }
