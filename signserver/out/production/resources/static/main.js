@@ -115,12 +115,18 @@ function onClear() {
 
 function save() {
 
-    if (!confirm("confirm send data?")) return;
-
-    var imgUrl = canvas.toDataURL(); // typeof imgUrl == string
+    var imgUrl = canvas.toDataURL('image/png'); // typeof imgUrl == string
     image.src = imgUrl;
-    console.log(imgUrl);
 
+    var blobBin = atob(imgUrl.split(',')[1]);   // base64 데이터 디코딩
+    var array = [];
+
+    for (var i = 0; i < blobBin.length ; i++) {
+        array.push(blobBin.charCodeAt(i));
+    }
+
+    var file = new Blob([new Uint8Array(array)], {type: 'image/png'});
+    /*
     var num;
     var objLen = document.getElementsByName('classify').length;
     for (var i = 0 ; i < objLen ; i++) {
@@ -130,10 +136,18 @@ function save() {
             break;
         }
     }
+    */
+    var formdata = new FormData();
+    formdata.append("file", file);
 
-    if (!confirm("confirm send data?")) {
-        location.href = "/sendImgURL?imgURL=" + imgUrl  + "&number=" + num;
-    }
-
-
+    $.ajax({
+            type : 'post',
+            url : '/saveImage',
+            data : formdata,
+            processData : false,	// data 파라미터 강제 string 변환 방지!!
+            contentType : false,	// application/x-www-form-urlencoded; 방지!!
+            success : function (data) {
+                alert("완료!")
+            }
+    });
 }

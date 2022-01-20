@@ -7,9 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -30,21 +37,34 @@ public class SignController {
         return "/dataList";
     }
 
-    @GetMapping("/sendImgURL")
-    public String imgURL(String imgURL , String number ) {
+    @RequestMapping("/saveImage")
+    public String saveImage(@RequestParam(value="file", required = true) MultipartFile [] file) {
+
+        byte[] bytes = null;
+        try {
+            bytes = file[0].getBytes();
+        } catch( Exception e) {
+            System.out.println("get bytes error");
+        }
+
+        String s = Base64.getEncoder().encodeToString(bytes);
+        s = "data:image/png;base64," + s;
 
         Sign sign = new Sign();
         // img URL
-        sign.setData(imgURL);
-        System.out.println(imgURL);
+        sign.setData(s);
         // Creation date
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String ss = sdf.format(new java.util.Date());
         sign.setCreated(java.sql.Date.valueOf(ss));
 
         // img type
-        sign.setLabel(Integer.parseInt(number));
+        sign.setLabel(Integer.parseInt("0"));
         signService.register(sign);
+
+
         return "redirect:/";
     }
+
+
 }
