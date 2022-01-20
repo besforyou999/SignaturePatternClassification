@@ -44,7 +44,7 @@ function InitEvent() {
     canvas.addEventListener('touchend', ev_canvas, false);
     clearBtn.addEventListener('click',  onClear);
     saveBtn.addEventListener('click', save);
-    readBtn.addEventListener('click', )
+    readBtn.addEventListener('click', buildDataList)
 }
 
 function tool_pencil() {
@@ -154,7 +154,5 @@ function save() {
 }
 
 function buildDataList() {
-
-    location.href = 
-
+    if (confirm("read data from database and build list?")) location.href = "/dataList";
 }

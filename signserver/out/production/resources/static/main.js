@@ -23,8 +23,8 @@ if (window.addEventListener) {
     window.addEventListener('load', InitEvent, false);
 }
 
-var form, image;
-var canvas, context ,tool, saveBtn, clearBtn;
+var form;
+var canvas, context ,tool, saveBtn, clearBtn, readBtn;
 var SignatureData = [], coord = [];
 
 function InitEvent() {
@@ -33,7 +33,7 @@ function InitEvent() {
     context     = canvas.getContext('2d');
     clearBtn    = document.getElementById('ClearBtn');
     saveBtn     = document.getElementById('SaveBtn');
-    image       = document.getElementById('img');
+    readBtn     = document.getElementById('ReadBtn');
 
     tool = new tool_pencil();
     canvas.addEventListener('mousedown', ev_canvas, false);
@@ -44,6 +44,7 @@ function InitEvent() {
     canvas.addEventListener('touchend', ev_canvas, false);
     clearBtn.addEventListener('click',  onClear);
     saveBtn.addEventListener('click', save);
+    readBtn.addEventListener('click', buildDataList)
 }
 
 function tool_pencil() {
@@ -149,4 +150,9 @@ function save() {
                 alert("완료!")
             }
     });
+    onClear();
+}
+
+function buildDataList() {
+    if (confirm("read data from database and build list?")) location.href = "/dataList";
 }
