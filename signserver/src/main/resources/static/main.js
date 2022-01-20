@@ -23,8 +23,8 @@ if (window.addEventListener) {
     window.addEventListener('load', InitEvent, false);
 }
 
-var form, image;
-var canvas, context ,tool, saveBtn, clearBtn;
+var form;
+var canvas, context ,tool, saveBtn, clearBtn, readBtn;
 var SignatureData = [], coord = [];
 
 function InitEvent() {
@@ -33,7 +33,7 @@ function InitEvent() {
     context     = canvas.getContext('2d');
     clearBtn    = document.getElementById('ClearBtn');
     saveBtn     = document.getElementById('SaveBtn');
-    image       = document.getElementById('img');
+    readBtn     = document.getElementById('ReadBtn');
 
     tool = new tool_pencil();
     canvas.addEventListener('mousedown', ev_canvas, false);
@@ -44,6 +44,7 @@ function InitEvent() {
     canvas.addEventListener('touchend', ev_canvas, false);
     clearBtn.addEventListener('click',  onClear);
     saveBtn.addEventListener('click', save);
+    readBtn.addEventListener('click', )
 }
 
 function tool_pencil() {
@@ -116,7 +117,6 @@ function onClear() {
 function save() {
 
     var imgUrl = canvas.toDataURL('image/png'); // typeof imgUrl == string
-    image.src = imgUrl;
 
     var blobBin = atob(imgUrl.split(',')[1]);   // base64 데이터 디코딩
     var array = [];
@@ -150,4 +150,11 @@ function save() {
                 alert("완료!")
             }
     });
+    onClear();
+}
+
+function buildDataList() {
+
+    location.href = 
+
 }
