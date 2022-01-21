@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Controller
 public class SignController {
@@ -38,17 +39,25 @@ public class SignController {
     }
 
     @RequestMapping("/saveImage")
-    public String saveImage(@RequestParam(value="file", required = true) MultipartFile [] file) {
-
+    public String saveImage(@RequestParam(value="file") MultipartFile [] file ) {
+        
         byte[] bytes = null;
         try {
             bytes = file[0].getBytes();
         } catch( Exception e) {
             System.out.println("get bytes error");
+            return "redirect:/";
         }
 
         String s = Base64.getEncoder().encodeToString(bytes);
         s = "data:image/png;base64," + s;
+
+        String number = null;
+        try {
+            number = new String(file[1].getBytes());
+        } catch (Exception e) {
+            System.out.println("number exception");
+        }
 
         Sign sign = new Sign();
         // img URL
@@ -59,7 +68,7 @@ public class SignController {
         sign.setCreated(java.sql.Date.valueOf(ss));
 
         // img type
-        sign.setLabel(Integer.parseInt("0"));
+        sign.setLabel(Integer.parseInt(number));
         signService.register(sign);
 
         System.out.println("save successful");
