@@ -48,7 +48,6 @@ public class SignController {
         }
 
         String s = Base64.getEncoder().encodeToString(bytes);
-
         s = "data:image/png;base64," + s;
 
         Sign sign = new Sign();

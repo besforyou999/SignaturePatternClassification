@@ -15,8 +15,7 @@
         <td th:text="${list.getId()}"></td>
         <td th:text="${list.getLabel()}"></td>
         <td th:text="${list.getCreated()}"></td>
-        <td img th:src="${list.getData()}"></td>
-        <!--- <td><img src='${list.getData()}' width="150px" height="150px"></td> --->
+        <td><img th:src='${list.getData()}' width="150px" height="150px"></td>
 
     </tr>
     <tr th:unless="${#lists.size(list)} > 0">
