@@ -76,8 +76,6 @@ public class SignController {
         sign.setLabel(Integer.parseInt(number));
         signService.register(sign);
 
-        System.out.println("save successful");
-
         return "redirect:/";
     }
 

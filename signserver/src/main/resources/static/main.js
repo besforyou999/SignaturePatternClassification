@@ -35,6 +35,8 @@ function InitEvent() {
     saveBtn     = document.getElementById('SaveBtn');
     readBtn     = document.getElementById('ReadBtn');
 
+    drawBorder();
+
     tool = new tool_pencil();
     canvas.addEventListener('mousedown', ev_canvas, false);
     canvas.addEventListener('mousemove', ev_canvas, false);
@@ -44,7 +46,14 @@ function InitEvent() {
     canvas.addEventListener('touchend', ev_canvas, false);
     clearBtn.addEventListener('click',  onClear);
     saveBtn.addEventListener('click', save);
-    readBtn.addEventListener('click', buildDataList)
+    readBtn.addEventListener('click', buildDataList);
+
+}
+
+function drawBorder() {
+    var a = 0.5;
+    context.strokeStyle = "#000000"; // black
+    context.strokeRect(a, a, canvas.width - a, canvas.height - a);
 }
 
 function tool_pencil() {
@@ -112,6 +121,7 @@ function ev_canvas(ev) {
 function onClear() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	context.restore();
+	drawBorder();
 }
 
 function save() {
