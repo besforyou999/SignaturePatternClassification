@@ -38,6 +38,11 @@ public class SignController {
         return "/dataList";
     }
 
+    @RequestMapping("/returnToMain")
+    public String returnToMain(Model model) throws Exception {
+        return "redirect:/";
+    }
+
     @RequestMapping("/saveImage")
     public String saveImage(@RequestParam(value="file") MultipartFile [] file ) {
         
