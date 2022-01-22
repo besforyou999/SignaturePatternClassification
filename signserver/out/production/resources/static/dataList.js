@@ -2,13 +2,20 @@ if (window.addEventListener) {
     window.addEventListener('load', InitEvent, false);
 }
 
-var toHomeBtn;
+var selectAllBtn;
 
 function InitEvent() {
-    toHomeBtn = document.getElementById('toHomeBtn');
-    toHomeBtn.addEventListener('click', returnToMain);
+    selectAllBtn    = document.getElementById('checkall');
+
+    selectAllBtn.addEventListener('click', selectAllCheckBox);
 }
 
-function returnToMain() {
-        location.href = "/returnToMain";
+
+function selectAllCheckBox() {
+    console.log("selectAllCheckBox function called");
+    var checkBoxes = document.getElementsByName("chk");
+    for (var checkbox in checkBoxes) {
+        console.log("checkboxes");
+        checkbox.checked = source.checked;
+    }
 }
