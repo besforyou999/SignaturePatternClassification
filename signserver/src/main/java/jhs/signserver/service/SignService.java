@@ -30,4 +30,8 @@ public class SignService {
     public Optional<Sign> findOne(Long signId){
         return signRepository.findById(signId);
     }
+
+    public void deleteSign(Sign sign) {
+        signRepository.deleteSign(sign);
+    }
 }

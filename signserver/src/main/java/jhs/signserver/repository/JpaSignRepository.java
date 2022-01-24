@@ -16,6 +16,11 @@ public class JpaSignRepository implements SignRepository {
     }
 
     @Override
+    public void deleteSign(Sign sign) {
+        em.remove(sign);
+    }
+
+    @Override
     public Sign save(Sign sign) {
        em.persist(sign);
        return sign;
