@@ -62,6 +62,7 @@ public class SignController {
             number = new String(file[1].getBytes());
         } catch (Exception e) {
             System.out.println("number exception");
+            return "redirect:/";
         }
 
         Sign sign = new Sign();
@@ -79,5 +80,9 @@ public class SignController {
         return "redirect:/";
     }
 
-
+    @RequestMapping("/deleteImage")
+    public void deleteImage(@RequestParam(value="id")Long id){
+        Sign sign = signService.findOne(id).get();
+        signService.deleteSign(sign);
+    }
 }

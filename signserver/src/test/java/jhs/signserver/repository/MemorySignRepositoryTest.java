@@ -10,7 +10,7 @@ import java.sql.Date;
 import java.util.List;
 
 public class MemorySignRepositoryTest {
-
+/*
     MemorySignRepository repository = new MemorySignRepository();
 
     @AfterEach
@@ -49,6 +49,6 @@ public class MemorySignRepositoryTest {
         List<Sign> result = repository.findAll();
 
         Assertions.assertThat(result.size()).isEqualTo(2);
-    }
+    }*/
 
 }

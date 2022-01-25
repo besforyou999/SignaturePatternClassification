@@ -27,7 +27,7 @@ class SignServiceTest {
     public void afterEach(){
         signRepository.clearStore();
     }
-
+/*
     @Test
     void 사인등록() {
         // given
@@ -42,7 +42,7 @@ class SignServiceTest {
         Sign findSign = signService.findOne(saveId).get();
         Assertions.assertThat(sign.getCreated()).isEqualTo(findSign.getCreated());
 
-    }
+    }*/
 
 
     @Test
