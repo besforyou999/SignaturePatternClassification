@@ -33,4 +33,6 @@ public class SignService {
     public void deleteSign(Sign sign) {
         signRepository.deleteSign(sign);
     }
+
+    public void deleteSignList(List<Sign> list) {signRepository.deleteSignList(list);}
 }

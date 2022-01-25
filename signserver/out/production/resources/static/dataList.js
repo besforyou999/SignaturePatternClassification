@@ -4,3 +4,18 @@
 파일만 만들어서 보냅니다 ..
 그리고 서버 실행하는데 필요 없는 부분들도 다 주석처리해놨어여..ㅎ
 */
+
+function deleteImg(id) {
+
+    $.ajax({
+        type : 'post',
+        url : '/deleteSign',
+        data : { "id" : id},
+        success : function (data) {
+            alert("완료!");
+            location.reload();
+        }
+    });
+
+
+}

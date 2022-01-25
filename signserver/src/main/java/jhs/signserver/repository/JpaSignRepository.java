@@ -3,6 +3,7 @@ package jhs.signserver.repository;
 import jhs.signserver.domain.Sign;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,5 +35,12 @@ public class JpaSignRepository implements SignRepository {
     @Override
     public List<Sign> findAll() {
         return em.createQuery("select m from Sign m", Sign.class).getResultList();
+    }
+
+    @Override
+    public void deleteSignList(List<Sign> list) {
+        Query qDeleteSigns = em.createQuery("delete from sign v where v.id in (:1)");
+        qDeleteSigns.setParameter(1, list);
+        qDeleteSigns.executeUpdate();
     }
 }

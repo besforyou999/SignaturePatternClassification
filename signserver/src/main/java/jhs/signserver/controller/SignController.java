@@ -1,13 +1,18 @@
 package jhs.signserver.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import jhs.signserver.domain.Sign;
 import jhs.signserver.repository.SignRepository;
 import jhs.signserver.service.SignService;
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -80,9 +85,14 @@ public class SignController {
         return "redirect:/";
     }
 
-    @RequestMapping("/deleteImage")
-    public void deleteImage(@RequestParam(value="id")Long id){
-        Sign sign = signService.findOne(id).get();
+    @RequestMapping("/deleteSign")
+    public String deleteImage(@RequestParam(value="id") String id, Model model) throws Exception{
+        Sign sign = signService.findOne(Long.parseLong(id)).get();
         signService.deleteSign(sign);
+
+        List<Sign> list = signService.findSigns();
+        model.addAttribute("list", list);
+        return "/dataList";
     }
+
 }

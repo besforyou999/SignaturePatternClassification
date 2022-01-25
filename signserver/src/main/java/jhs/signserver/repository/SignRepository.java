@@ -13,4 +13,5 @@ public interface SignRepository {
     Optional<Sign> findById(Long id);
     List<Sign> findAll();
     void deleteSign(Sign sign);
+    void deleteSignList(List<Sign> list);
 }
