@@ -35,4 +35,8 @@ public class SignService {
     }
 
     public void deleteSignList(List<Sign> list) {signRepository.deleteSignList(list);}
+
+    public void changeSignLable(Integer label, Long id) {
+        signRepository.changeSignLabel(label, id);
+    }
 }

@@ -43,16 +43,18 @@
                 <td th:text='${list.getLabel()}'></td>
                 <td th:text='${list.getCreated()}'></td>
                 <td><img th:src='${list.getData()}' width="150px" height="150px"></td>
-                <td><button type="button" name="deleteBtn" class="deleteBtn" th:attr="onclick=|deleteImg('${list.getId()}')|">Delete</button></td>
+                <td><button type="button" name="deleteBtn" class="deleteBtn"
+                            th:attr="onclick=|deleteImg('${list.getId()}')|">Delete</button></td>
                 <td>
-                    <select class="dropDownList">
+                    <select class="dropDownList" th:id="${list.getId()}">
                         <option value="0">unknown</option>
                         <option value="1">Number</option>
                         <option value="2">Korean</option>
                         <option value="3">English</option>
                     </select>
                 </td>
-                <td><input type="button" id="saveBtn" name="saveBtn" class ='saveBtn' value="save"/></td>
+                <td><button type="button" name="saveBtn" class ="saveBtn"
+                                th:attr="onclick=|saveChangeLabel('${list.getId()}')|"/>Save</td>
             </tr>
             <tr th:unless="${#lists.size(list)} > 0">
                 <td colspan="4">조회된 결과가 없습니다</td>

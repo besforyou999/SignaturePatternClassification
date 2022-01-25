@@ -4,6 +4,7 @@ import jhs.signserver.domain.Sign;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,5 +43,13 @@ public class JpaSignRepository implements SignRepository {
         Query qDeleteSigns = em.createQuery("delete from sign v where v.id in (:1)");
         qDeleteSigns.setParameter(1, list);
         qDeleteSigns.executeUpdate();
+    }
+
+    @Override
+    public void changeSignLabel(Integer label, Long id) {
+        Query query = em.createNativeQuery("UPDATE sign SET label= ?1 WHERE id = ?2");
+        query.setParameter(1, label);
+        query.setParameter(2, id);
+        query.executeUpdate();
     }
 }

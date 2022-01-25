@@ -95,4 +95,16 @@ public class SignController {
         return "/dataList";
     }
 
+    @RequestMapping("/changeLabel")
+    public String changeLabel(@RequestParam(value="label") String label, @RequestParam(value="id") String id, Model model) throws Exception{
+
+        System.out.println(label);
+        System.out.println(id);
+
+        signService.changeSignLable(Integer.parseInt(label), Long.parseLong(id));
+
+        List<Sign> list = signService.findSigns();
+        model.addAttribute("list", list);
+        return "redirect:/";
+    }
 }
