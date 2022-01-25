@@ -1,10 +1,10 @@
 package jhs.signserver.repository;
 
 import jhs.signserver.domain.Sign;
-import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+/*
 //@Repository
 public class MemorySignRepository implements SignRepository{
 
@@ -19,7 +19,7 @@ public class MemorySignRepository implements SignRepository{
     }
 
     @Override
-    public Optional<Sign> findById(Long id) {
+    public Sign findById(Long id) {
         return Optional.ofNullable(store.get(id));
     }
 
@@ -32,3 +32,4 @@ public class MemorySignRepository implements SignRepository{
         store.clear();
     }
 }
+*/

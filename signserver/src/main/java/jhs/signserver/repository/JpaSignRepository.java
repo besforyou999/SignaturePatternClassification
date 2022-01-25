@@ -1,7 +1,6 @@
 package jhs.signserver.repository;
 
 import jhs.signserver.domain.Sign;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
