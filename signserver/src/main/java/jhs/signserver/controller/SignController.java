@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 import jhs.signserver.domain.Sign;
 import jhs.signserver.repository.SignRepository;
 import jhs.signserver.service.SignService;
-import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
