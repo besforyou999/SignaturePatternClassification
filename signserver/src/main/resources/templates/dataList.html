@@ -46,7 +46,8 @@
                 <td><button type="button" name="deleteBtn" class="deleteBtn"
                             th:attr="onclick=|deleteImg('${list.getId()}')|">Delete</button></td>
                 <td>
-                    <select class="dropDownList" th:id="${list.getId()}">
+                    <select class="dropDownList" th:id="${list.getId()}" >
+                        <option value="none">라벨 변경</option>
                         <option value="0">unknown</option>
                         <option value="1">Number</option>
                         <option value="2">Korean</option>
