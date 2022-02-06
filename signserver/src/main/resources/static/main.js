@@ -127,7 +127,7 @@ function onClear() {
 function save() {
 
     var imgUrl = canvas.toDataURL('image/png'); // typeof imgUrl == string
-
+    //var imgArray = canvasToArray();
     var blobBin = atob(imgUrl.split(',')[1]);   // base64 데이터 디코딩
     var array = [];
 
@@ -169,3 +169,9 @@ function save() {
 function buildDataList() {
     if (confirm("read data from database and build list?")) location.href = "/dataList";
 }
+
+// canvas to array convert .  return array
+/*
+function canvasToArray(){
+
+}*/

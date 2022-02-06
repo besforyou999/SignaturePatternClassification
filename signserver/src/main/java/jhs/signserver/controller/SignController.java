@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.List;
@@ -44,8 +45,10 @@ public class SignController {
             System.out.println("get bytes error");
             return "redirect:/";
         }
-
+        Sign sign = new Sign();
+       // sign.setImage(Base64.getEncoder().encode(bytes));
         String s = Base64.getEncoder().encodeToString(bytes);
+
         s = "data:image/png;base64," + s;
 
         String number = null;
@@ -56,7 +59,7 @@ public class SignController {
             return "redirect:/";
         }
 
-        Sign sign = new Sign();
+
         // img URL
         sign.setData(s);
         // Creation date
@@ -66,6 +69,8 @@ public class SignController {
 
         // img type
         sign.setLabel(Integer.parseInt(number));
+        //array?
+       // sign.setImage(array);
         signService.register(sign);
 
         return "redirect:/";
