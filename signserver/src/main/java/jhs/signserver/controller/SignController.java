@@ -26,7 +26,7 @@ public class SignController {
     public String toDataList(Model model) throws Exception {
         List<Sign> list = signService.findSigns();
         model.addAttribute("list", list);
-        return "/dataList";
+        return "dataList";
     }
 
     @RequestMapping("/returnToMain")
@@ -78,7 +78,7 @@ public class SignController {
 
         List<Sign> list = signService.findSigns();
         model.addAttribute("list", list);
-        return "/dataList";
+        return "dataList";
     }
 
     @RequestMapping("/changeLabel")
