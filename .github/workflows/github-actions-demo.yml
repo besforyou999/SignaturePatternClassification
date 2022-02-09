@@ -14,12 +14,10 @@ jobs:
       with:
         java-version : '11'
         distribution: 'adopt'
-    - name: change directory 
-      run: cd signserver
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      run: chmod +x signserver/gradlew
     - name : Build with Gradle
-      run: ./gradlew build
+      run: signserver/gradlew build
 
     - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
     - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
