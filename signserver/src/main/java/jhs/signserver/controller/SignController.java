@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.List;
@@ -69,8 +68,7 @@ public class SignController {
 
         // img type
         sign.setLabel(Integer.parseInt(number));
-        //array?
-       // sign.setImage(array);
+  
         signService.register(sign);
 
         return "redirect:/";
