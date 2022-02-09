@@ -12,6 +12,7 @@ public class Sign {
     private Long id;
     // private Json data?
     private String data; // img URL
+    private byte[] image;
     private int label;       // 0 == number, 1 == Number, 2 == Korean, 3 == English
     private Date created;   // create date
 
@@ -45,5 +46,13 @@ public class Sign {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

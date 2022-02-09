@@ -127,7 +127,6 @@ function onClear() {
 function save() {
 
     var imgUrl = canvas.toDataURL('image/png'); // typeof imgUrl == string
-
     var blobBin = atob(imgUrl.split(',')[1]);   // base64 데이터 디코딩
     var array = [];
 

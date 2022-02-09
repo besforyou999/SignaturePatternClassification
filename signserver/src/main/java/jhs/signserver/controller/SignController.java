@@ -44,8 +44,10 @@ public class SignController {
             System.out.println("get bytes error");
             return "redirect:/";
         }
-
+        Sign sign = new Sign();
+       // sign.setImage(Base64.getEncoder().encode(bytes));
         String s = Base64.getEncoder().encodeToString(bytes);
+
         s = "data:image/png;base64," + s;
 
         String number = null;
@@ -56,7 +58,7 @@ public class SignController {
             return "redirect:/";
         }
 
-        Sign sign = new Sign();
+
         // img URL
         sign.setData(s);
         // Creation date
@@ -66,6 +68,7 @@ public class SignController {
 
         // img type
         sign.setLabel(Integer.parseInt(number));
+  
         signService.register(sign);
 
         return "redirect:/";
