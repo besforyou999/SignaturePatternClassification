@@ -168,9 +168,3 @@ function save() {
 function buildDataList() {
     if (confirm("read data from database and build list?")) location.href = "/dataList";
 }
-
-// canvas to array convert .  return array
-/*
-function canvasToArray(){
-
-}*/
