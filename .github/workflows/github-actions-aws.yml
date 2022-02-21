@@ -42,6 +42,7 @@ jobs:
           script: |
             cd app/git/SignaturePatternClassification
             git reset --hard
+            git fetch
             git pull origin main
             cd /home/ec2-user/app/git/SignaturePatternClassification/signserver
             ./gradlew build
