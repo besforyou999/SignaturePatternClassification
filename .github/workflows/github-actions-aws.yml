@@ -40,9 +40,14 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            touch test
             cd app/git/SignaturePatternClassification
-            echo "It works!"
+            git reset --hard
+            git pull origin main
+            cd /home/ec2-user/app/git/SignaturePatternClassification/signserver
+            ./gradlew build
+            cd build/libs
+            java -jar /home/ec2-user/app/git/SignaturePatternClassification/signserver/build/libs/signserver-0.0.1-SNAPSHOT.jar & echo $! > ./pid.file &
+            #kill $(cat ./pid.file)
             
       - name: Remove Github Actions IP from security group
         run: |
