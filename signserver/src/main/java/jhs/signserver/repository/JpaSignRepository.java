@@ -52,4 +52,13 @@ public class JpaSignRepository implements SignRepository {
         query.setParameter(2, id);
         query.executeUpdate();
     }
+
+    @Override
+    public void changeDataURL(Sign sign, Long id) {
+        Query query = em.createNativeQuery("UPDATE sign SET data= ?1 WHERE id = ?2");
+        query.setParameter(1, sign.getData());
+        query.setParameter(2, id);
+        query.executeUpdate();
+
+    }
 }

@@ -39,4 +39,7 @@ public class SignService {
     public void changeSignLable(Integer label, Long id) {
         signRepository.changeSignLabel(label, id);
     }
+
+    public void changeDataURL(Sign s, Long id) { signRepository.changeDataURL(s, id);
+    }
 }

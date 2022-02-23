@@ -15,4 +15,5 @@ public interface SignRepository {
     void deleteSign(Sign sign);
     void deleteSignList(List<Sign> list);
     void changeSignLabel(Integer label, Long id);
+    void changeDataURL(Sign sign, Long id);
 }
