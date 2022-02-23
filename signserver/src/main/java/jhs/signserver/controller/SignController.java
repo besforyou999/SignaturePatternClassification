@@ -8,6 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import javax.xml.bind.DatatypeConverter;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.List;
@@ -26,8 +33,43 @@ public class SignController {
     public String toDataList(Model model) throws Exception {
         List<Sign> list = signService.findSigns();
         model.addAttribute("list", list);
+
         return "dataList";
     }
+
+    @RequestMapping("/deleteBorder")
+    public String deleteBorder() throws Exception {
+        List<Sign> list = signService.findSigns();
+
+        if (list.size() == 0) {
+            System.out.println("list size : 0");
+            return "redirect:/";
+        }
+        for (Sign s : list) {
+            String str = s.getData();
+            String base64Image = str.split(",")[1];
+            byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
+            BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageBytes));
+
+            Graphics2D graphics2D = (Graphics2D) image.getGraphics();
+            Stroke stroke1 = new BasicStroke(2f);
+            graphics2D.setStroke(stroke1);
+            graphics2D.setColor(Color.WHITE);
+            graphics2D.drawRect(0, 0, image.getWidth(), image.getHeight());
+            graphics2D.dispose();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(image, "png", baos);
+            String data = DatatypeConverter.printBase64Binary(baos.toByteArray());
+            str = "data:image/png;base64," + data;
+            s.setData(str);
+            list.set(0, s);
+
+            signService.changeDataURL(s, s.getId());
+        }
+        System.out.println("delete Border Function executed");
+        return "redirect:/";
+    }
+
 
     @RequestMapping("/returnToMain")
     public String returnToMain(Model model) throws Exception {

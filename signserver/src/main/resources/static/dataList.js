@@ -1,10 +1,16 @@
+
+
+
+
 var deleteBorderBtn;
 deleteBorderBtn = document.getElementById('deleteBorderBtn');
 deleteBorderBtn.addEventListener('click', testFunction);
 
-function testFunction() {
-    alert("Hello world!");
+function testFunction(size) {
+    alert(size);
 }
+
+
 
 function deleteImg(id) {
     $.ajax({
