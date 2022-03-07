@@ -80,22 +80,25 @@ function tool_pencil() {
     };
 
     this.touchstart = function (e) {
+        bodyScrollDisable();
         context.beginPath();
         context.moveTo(e._x, e._y);
         tool.started = true;
+
     };
 
     this.touchmove = function (e) {
         if (tool.started) {
             context.lineTo(e._x, e._y);
             context.stroke();
+
         }
     };
 
     this.touchend = function (e) {
         if (tool.started) {
             tool.touchmove(e);
-            tool.started = false;
+          bodyScrollAble();
         }
     };
 }
@@ -166,4 +169,12 @@ function buildDataList() {
 function deleteBorderFunciton() {
     alert("delete border");
     location.href = "/deleteBorder";
+}
+
+function bodyScrollDisable(){
+    document.body.style.overflow="hidden";
+}
+
+function bodyScrollAble(){
+    document.body.style.overflow="auto";
 }

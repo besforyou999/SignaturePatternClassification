@@ -27,6 +27,8 @@ var form;
 var canvas, context ,tool, saveBtn, clearBtn, readBtn;
 var SignatureData = [], coord = [];
 
+var deleteBorderBtn;
+
 function InitEvent() {
     form        = document.querySelector("form");
     canvas      = document.getElementById('canvas');
@@ -34,6 +36,7 @@ function InitEvent() {
     clearBtn    = document.getElementById('ClearBtn');
     saveBtn     = document.getElementById('SaveBtn');
     readBtn     = document.getElementById('ReadBtn');
+    deleteBorderBtn = document.getElementById('deleteBorder');
 
     tool = new tool_pencil();
     canvas.addEventListener('mousedown', ev_canvas, false);
@@ -45,7 +48,7 @@ function InitEvent() {
     clearBtn.addEventListener('click',  onClear);
     saveBtn.addEventListener('click', save);
     readBtn.addEventListener('click', buildDataList);
-
+    deleteBorderBtn.addEventListener('click', deleteBorderFunciton);
 }
 
 function tool_pencil() {
@@ -77,22 +80,25 @@ function tool_pencil() {
     };
 
     this.touchstart = function (e) {
+        bodyScrollDisable();
         context.beginPath();
         context.moveTo(e._x, e._y);
         tool.started = true;
+
     };
 
     this.touchmove = function (e) {
         if (tool.started) {
             context.lineTo(e._x, e._y);
             context.stroke();
+
         }
     };
 
     this.touchend = function (e) {
         if (tool.started) {
             tool.touchmove(e);
-            tool.started = false;
+          bodyScrollAble();
         }
     };
 }
@@ -160,3 +166,15 @@ function buildDataList() {
     if (confirm("read data from database and build list?")) location.href = "/dataList";
 }
 
+function deleteBorderFunciton() {
+    alert("delete border");
+    location.href = "/deleteBorder";
+}
+
+function bodyScrollDisable(){
+    document.body.style.overflow="hidden";
+}
+
+function bodyScrollAble(){
+    document.body.style.overflow="auto";
+}
