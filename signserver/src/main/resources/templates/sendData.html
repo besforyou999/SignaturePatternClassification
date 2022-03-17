@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <title>Send Data to AI Model</title>
+  <link rel="stylesheet" href="styles.css?ver=1">
+</head>
+<body>
+<h1>Send Data</h1>
+<div>
+  <canvas id ='canvas' width='256' height='256'>
+    Canvas not supported
+  </canvas>
+</div>
+
+
+<button class = "btn" id = 'ClearBtn'>Screen Clear</button>
+
+<button class = "btn" id = 'sendBtn'>Send</button>
+
+
+<form action="toMain" method="post">
+  <input class="btn" type="submit" id="toMain" value="Back">
+</form>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src='sendData.js?ver=22'></script>
+</body>
+</html>

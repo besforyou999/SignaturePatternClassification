@@ -7,23 +7,14 @@ body {
     margin-bottom: 15px;
 }
 
-.save {
+
+.btn {
     margin: 10px;
     font-size: 20px;
     padding: 10px 10px;
 }
 
-.clear {
-    margin-left : 10px;
-    font-size: 20px;
-    padding: 10px 10px;
-}
 
-.read {
-    margin-left : 10px;
-    font-size: 20px;
-    padding: 10px 10px;
-}
 
 #canvas {
     margin: 20px;
