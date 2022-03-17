@@ -37,7 +37,7 @@ public class SignController {
         return "dataList";
     }
 
-    @RequestMapping("/deleteBorder")
+   /* @RequestMapping("/deleteBorder")
     public String deleteBorder() throws Exception {
         List<Sign> list = signService.findSigns();
 
@@ -68,7 +68,7 @@ public class SignController {
         }
         System.out.println("delete Border Function executed");
         return "redirect:/";
-    }
+    }*/
 
 
     @RequestMapping("/returnToMain")
