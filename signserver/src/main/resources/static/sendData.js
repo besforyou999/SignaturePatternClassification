@@ -151,7 +151,7 @@ function send() {
 
     $.ajax({
             type : 'post',
-            url : '/saveImage',  // sendImage로 바꾸고.. 모델로 전달
+            url : '/sendImage',  // sendImage로 바꾸고.. 모델로 전달
             data : formdata,
             processData : false,
             contentType : false,
