@@ -143,11 +143,11 @@ function send() {
         }
     }*/
 
-    var numBlob = new Blob([num], {type: 'text/plain'});
+    //var numBlob = new Blob([num], {type: 'text/plain'});
 
     var formdata = new FormData();
     formdata.append("file", file);
-    formdata.append("file", numBlob);
+    //formdata.append("file", numBlob);
 
     $.ajax({
             type : 'post',

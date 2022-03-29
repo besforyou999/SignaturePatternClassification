@@ -1,7 +1,10 @@
 package jhs.signserver.controller;
 
 import jhs.signserver.domain.Sign;
+import jhs.signserver.service.ClientService;
 import jhs.signserver.service.SignService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +24,9 @@ import java.util.List;
 
 @Controller
 public class SignController {
+
+    private static final Logger logger = LoggerFactory.getLogger(SignController.class);
+
 
     private final SignService signService;
 
@@ -118,7 +124,7 @@ public class SignController {
 
     @RequestMapping("/sendImage")
     public String sendImage(@RequestParam(value="file") MultipartFile [] file ) {
-
+/*
         byte[] bytes = null;
         try {
             bytes = file[0].getBytes();
@@ -146,15 +152,16 @@ public class SignController {
         // Creation date
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String ss = sdf.format(new java.util.Date());
-        sign.setCreated(java.sql.Date.valueOf(ss));
+        sign.setCreated(java.sql.Date.valueOf(ss));*/
 
         // img type
-        sign.setLabel(Integer.parseInt(number));
 
+        logger.info("send Image Test");
         /*
         이거 대신 소켓 통신으로 전달!
         signService.register(sign);*/
-
+        ClientService clientService = new ClientService();
+        clientService.connectTest();
         return "redirect:/";
     }
 
