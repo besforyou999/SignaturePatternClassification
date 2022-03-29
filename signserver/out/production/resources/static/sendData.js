@@ -143,15 +143,15 @@ function send() {
         }
     }*/
 
-    var numBlob = new Blob([num], {type: 'text/plain'});
+    //var numBlob = new Blob([num], {type: 'text/plain'});
 
     var formdata = new FormData();
     formdata.append("file", file);
-    formdata.append("file", numBlob);
+    //formdata.append("file", numBlob);
 
     $.ajax({
             type : 'post',
-            url : '/saveImage',  // sendImage로 바꾸고.. 모델로 전달
+            url : '/sendImage',  // sendImage로 바꾸고.. 모델로 전달
             data : formdata,
             processData : false,
             contentType : false,
