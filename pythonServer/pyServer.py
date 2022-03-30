@@ -8,6 +8,14 @@ import glob
 
 model = load_model('signature_classification_model.h5')
 
+def save_img_as_png(msg):
+    image = base64.b64decode(msg)
+    fileName = 'test.png'
+    imagePath = ("./" + fileName)
+    img = Image.open(io.BytesIO(image))
+    img.save(imagePath, 'png')
+
+
 # binder함수는 서버에서 accept가 되면 생성되는 socket 인스턴스를 통해 client로 부터 데이터를 받으면 echo형태로 재송신하는 메소드이다.
 def binder(client_socket, addr):
     # 커넥션이 되면 접속 주소가 나온다.
@@ -30,8 +38,39 @@ def binder(client_socket, addr):
             msg = data.decode();
             # 수신된 메시지를 콘솔에 출력한다.
             print('Received from', addr, msg);
+
+            save_img_as_png(msg)
+
+            img = Image.open('test.png')
+            
+            # img resize
+            width = 64
+            height = 64
+            img_resize = img.resize((width,height))
+
+            new_col = []
+            imgArray = np.array(img_resize)    
+            
+            print("imgArray : " , imgArray.shape)
+
+            for i in range(64):
+                new_row = []
+                for j in range(64):
+                    new_row.append(imgArray[i][j][3])
+                new_col.append(new_row)
+
+            test_img = np.array(new_col)
+            print("test_img : ", test_img.shape)
+
+            test_img = test_img.reshape((1, width * height))
+            norm_test_img = test_img.astype('float32') / 255
+
+            result = model.predict(norm_test_img)
+
+            result = np.argmax(result)
+
             # 수신된 메시지 앞에 「echo:」 라는 메시지를 붙힌다.
-            respond = "respond from python"
+            respond = str(result)
             # 바이너리(byte)형식으로 변환한다.
             respond_byte = respond.encode();
             # 바이너리의 데이터 사이즈를 구한다.
@@ -41,21 +80,6 @@ def binder(client_socket, addr):
             # 데이터를 클라이언트로 전송한다.
             client_socket.sendall(respond_byte);
 
-            image = base64.b64decode(msg)
-            fileName = 'test.png'
-
-            imagePath = ("./" + fileName)
-            img = Image.open(io.BytesIO(image))
-            img.save(imagePath, 'png')
-
-            new_col = []
-            imgArray = np.array(img)    
-            
-            for i in range(64):
-                new_row = []
-                for j in range(64):
-                    new_row.append(imgArray[i][j][3])
-                    new_col.append(new_row)
 
     except Exception as e:
     # 접속이 끊기면 except가 발생한다.
@@ -88,4 +112,6 @@ except:
 finally:
     # 에러가 발생하면 서버 소켓을 닫는다.
     server_socket.close();
+
+
 
