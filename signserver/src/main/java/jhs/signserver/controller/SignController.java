@@ -29,10 +29,12 @@ public class SignController {
 
 
     private final SignService signService;
+    private final ClientService clientService;
 
     @Autowired
-    public SignController(SignService signService) {
+    public SignController(SignService signService, ClientService clientService) {
         this.signService = signService;
+        this.clientService = clientService;
     }
 
     @GetMapping("/dataList")
@@ -139,7 +141,6 @@ public class SignController {
 
         logger.info("send Image Test");
 
-        ClientService clientService = new ClientService();
         clientService.connectTest(s);
         return "redirect:/";
     }

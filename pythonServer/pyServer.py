@@ -15,9 +15,12 @@ def binder(client_socket, addr):
     try:
 # 접속 상태에서는 클라이언트로 부터 받을 데이터를 무한 대기한다.
 # 만약 접속이 끊기게 된다면 except가 발생해서 접속이 끊기게 된다.
-        while True:
+        not_connected = True
+        while not_connected:
             # socket의 recv함수는 연결된 소켓으로부터 데이터를 받을 대기하는 함수입니다. 최초 4바이트를 대기합니다.
             data = client_socket.recv(4);
+            if data is not None:
+                not_connected = False
             # 최초 4바이트는 전송할 데이터의 크기이다. 그 크기는 little big 엔디언으로 byte에서 int형식으로 변환한다.
             # C#의 BitConverter는 big엔디언으로 처리된다.
             length = int.from_bytes(data, "little");
@@ -28,15 +31,15 @@ def binder(client_socket, addr):
             # 수신된 메시지를 콘솔에 출력한다.
             print('Received from', addr, msg);
             # 수신된 메시지 앞에 「echo:」 라는 메시지를 붙힌다.
-            # msg = "echo : " + msg;
+            respond = "respond from python"
             # 바이너리(byte)형식으로 변환한다.
-            # data = msg.encode();
+            respond_byte = respond.encode();
             # 바이너리의 데이터 사이즈를 구한다.
-            # length = len(data);
+            respond_byte_length = len(respond_byte);
             # 데이터 사이즈를 little 엔디언 형식으로 byte로 변환한 다음 전송한다.
-            # client_socket.sendall(length.to_bytes(4, byteorder='little'));
+            client_socket.sendall(respond_byte_length.to_bytes(4, byteorder='little'));
             # 데이터를 클라이언트로 전송한다.
-            # client_socket.sendall(data);
+            client_socket.sendall(respond_byte);
 
             image = base64.b64decode(msg)
             fileName = 'test.png'
@@ -44,7 +47,7 @@ def binder(client_socket, addr):
             imagePath = ("./" + fileName)
             img = Image.open(io.BytesIO(image))
             img.save(imagePath, 'png')
-            
+
             new_col = []
             imgArray = np.array(img)    
             
@@ -53,7 +56,6 @@ def binder(client_socket, addr):
                 for j in range(64):
                     new_row.append(imgArray[i][j][3])
                     new_col.append(new_row)
-
 
     except Exception as e:
     # 접속이 끊기면 except가 발생한다.
