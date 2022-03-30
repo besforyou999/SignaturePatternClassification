@@ -44,31 +44,16 @@ def binder(client_socket, addr):
             imagePath = ("./" + fileName)
             img = Image.open(io.BytesIO(image))
             img.save(imagePath, 'png')
-
-            '''
-            width = 64
-            height = 64
-
-            img_resize = img.resize((width, height))
-
-
-            new_col = []
-            imgArray = np.array(img_resize)
-            print(imgArray.shape)
-            for i in range(width):
-                new_row = []
-                for j in range(height):
-                    new_row.append(imgArray[i][j][3])
-                new_col.append(new_row)
-            new_col = np.array(new_col)
-
-            print(new_col.shape)
-
-            result = model.predict(new_col.reshape(64 * 64))
-            print(result) 
-            '''
-
             
+            new_col = []
+            imgArray = np.array(img)    
+            
+            for i in range(64):
+                new_row = []
+                for j in range(64):
+                    new_row.append(imgArray[i][j][3])
+                    new_col.append(new_row)
+
 
     except Exception as e:
     # 접속이 끊기면 except가 발생한다.
