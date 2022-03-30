@@ -108,7 +108,6 @@ public class SignController {
             return "redirect:/";
         }
 
-
         // img URL
         sign.setData(s);
         // Creation date
@@ -125,7 +124,7 @@ public class SignController {
     }
 
     @RequestMapping("/sendImage")
-    public String sendImage(@RequestParam(value="file") MultipartFile [] file ) {
+    public String sendImage(@RequestParam(value="file") MultipartFile [] file, Model model ) {
 
         byte[] bytes = null;
         try {
@@ -138,13 +137,39 @@ public class SignController {
         // sign.setImage(Base64.getEncoder().encode(bytes));
         String s = Base64.getEncoder().encodeToString(bytes);
 
+        String result = convertResult(clientService.sendImage(s));
+        logger.info("send Image Test " + result);
+        model.addAttribute("result", result);
 
-        logger.info("send Image Test");
-
-        clientService.connectTest(s);
         return "redirect:/";
     }
 
+    public String convertResult(String frModel){
+        if(frModel == null){
+            return "Error!";
+        }
+        else{
+           int num =Integer.parseInt(frModel);
+           String result;
+           switch (num){
+               case 0:
+                   result="Unknown";
+                   break;
+               case 1:
+                   result="Number";
+                   break;
+               case 2:
+                   result = "Korean";
+                   break;
+               case 3:
+                   result = "English";
+                   break;
+               default:
+                   result = "No exist result";
+           }
+           return result;
+        }
+    }
     @RequestMapping("/deleteSign")
     public String deleteImage(@RequestParam(value="id") String id, Model model) throws Exception{
         Sign sign = signService.findOne(Long.parseLong(id)).get();
