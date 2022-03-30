@@ -1,4 +1,10 @@
 import socket, threading;
+import base64
+import numpy as np
+from PIL import Image
+import io
+from keras.models import load_model
+
 # binder함수는 서버에서 accept가 되면 생성되는 socket 인스턴스를 통해 client로 부터 데이터를 받으면 echo형태로 재송신하는 메소드이다.
 def binder(client_socket, addr):
     # 커넥션이 되면 접속 주소가 나온다.
@@ -19,18 +25,37 @@ def binder(client_socket, addr):
             # 수신된 메시지를 콘솔에 출력한다.
             print('Received from', addr, msg);
             # 수신된 메시지 앞에 「echo:」 라는 메시지를 붙힌다.
-            msg = "echo : " + msg;
+            # msg = "echo : " + msg;
             # 바이너리(byte)형식으로 변환한다.
-            data = msg.encode();
+            # data = msg.encode();
             # 바이너리의 데이터 사이즈를 구한다.
-            length = len(data);
+            # length = len(data);
             # 데이터 사이즈를 little 엔디언 형식으로 byte로 변환한 다음 전송한다.
-            client_socket.sendall(length.to_bytes(4, byteorder='little'));
+            # client_socket.sendall(length.to_bytes(4, byteorder='little'));
             # 데이터를 클라이언트로 전송한다.
-            client_socket.sendall(data);
-    except:
+            # client_socket.sendall(data);
+
+            image = base64.b64decode(msg)
+            fileName = 'test.png'
+
+            imagePath = ("./" + fileName)
+            img = Image.open(io.BytesIO(image))
+            img.save(imagePath, 'png')
+            
+            new_col = []
+            imgArray = np.array(img)    
+            
+            for i in range(64):
+                new_row = []
+                for j in range(64):
+                    new_row.append(imgArray[i][j][3])
+                    new_col.append(new_row)
+
+
+    except Exception as e:
     # 접속이 끊기면 except가 발생한다.
         print("except : " , addr);
+        print(e)
     finally:
     # 접속이 끊기면 socket 리소스를 닫는다.
         client_socket.close();
