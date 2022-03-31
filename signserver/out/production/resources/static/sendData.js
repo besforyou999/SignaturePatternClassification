@@ -146,7 +146,7 @@ function send() {
             async : false,
             success : function (rslt) {
                 $('#result').text(rslt)
-                console.log(rslt)
+                alert(rslt);
             }
 
     });
