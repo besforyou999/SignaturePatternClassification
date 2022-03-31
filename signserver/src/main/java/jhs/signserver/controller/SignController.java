@@ -124,6 +124,7 @@ public class SignController {
     }
 
     @RequestMapping("/sendImage")
+    @ResponseBody
     public String sendImage(@RequestParam(value="file") MultipartFile [] file, Model model ) {
 
         byte[] bytes = null;
@@ -134,14 +135,11 @@ public class SignController {
             return "redirect:/";
         }
         Sign sign = new Sign();
-        // sign.setImage(Base64.getEncoder().encode(bytes));
         String s = Base64.getEncoder().encodeToString(bytes);
 
         String result = convertResult(clientService.sendImage(s));
-        logger.info("send Image Test " + result);
-        model.addAttribute("result", result);
 
-        return "redirect:/";
+        return result;
     }
 
     public String convertResult(String frModel){

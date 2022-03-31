@@ -143,9 +143,12 @@ function send() {
             data : formdata,
             processData : false,
             contentType : false,
-            success : function (data) {
-                alert("완료!")
+            async : false,
+            success : function (rslt) {
+                $('#result').text(rslt)
+                alert(rslt);
             }
+
     });
     onClear();
 }

@@ -172,9 +172,3 @@ function bodyScrollDisable(){
 function bodyScrollAble(){
     document.body.style.overflow="auto";
 }
-
-/*function deleteBorderFunciton() {
-    alert("delete border");
-    location.href = "/deleteBorder";
-}*/
-
