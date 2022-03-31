@@ -146,7 +146,7 @@ function send() {
             async : false,
             success : function (rslt) {
                 $('#result').text(rslt)
-                console.log(rslt)
+                alert(rslt); //디버깅용 나중에 완성시 지워도됩니다~~
             }
 
     });
