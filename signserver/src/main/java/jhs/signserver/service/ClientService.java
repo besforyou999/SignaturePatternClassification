@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class ClientService {
 
-    public void connectTest(String encoded_str) {
+    public String sendImage(String encoded_str) {
         try (Socket client = new Socket()) {
             InetSocketAddress ipep = new InetSocketAddress("127.0.0.1", 9999);
 
@@ -43,10 +43,12 @@ public class ClientService {
                 receiver.read(data, 0, length);
 
                 encoded_str = new String(data, "UTF-8");
-                System.out.println(encoded_str);
+                //System.out.println(encoded_str);
+                return encoded_str;
             }
         } catch (Throwable e) {
             e.printStackTrace();
+            return null;
         }
     }
 }

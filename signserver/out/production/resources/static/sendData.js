@@ -133,25 +133,13 @@ function send() {
 
     var file = new Blob([new Uint8Array(array)], {type: 'image/png'});
 
-   /* var num;
-    var objLen = document.getElementsByName('classify').length;
-    for (var i = 0 ; i < objLen ; i++) {
-        var curObj = document.getElementsByName('classify')[i];
-        if (curObj.checked == true) {
-            num = String(curObj.value);
-            break;
-        }
-    }*/
-
-    //var numBlob = new Blob([num], {type: 'text/plain'});
 
     var formdata = new FormData();
     formdata.append("file", file);
-    //formdata.append("file", numBlob);
 
     $.ajax({
             type : 'post',
-            url : '/sendImage',  // sendImage로 바꾸고.. 모델로 전달
+            url : '/sendImage',
             data : formdata,
             processData : false,
             contentType : false,
@@ -163,6 +151,7 @@ function send() {
 }
 
 function bodyScrollDisable(){
+
     document.body.style.overflow="hidden";
 }
 
