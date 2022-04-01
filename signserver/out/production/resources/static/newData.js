@@ -96,15 +96,15 @@ function tool_pencil() {
     this.touchend = function (e) {
         if (tool.started) {
             tool.touchmove(e);
-          bodyScrollAble();
+         bodyScrollAble();
         }
     };
 }
 
 function ev_canvas(ev) {
     if (ev.layerX || ev.layerX == 0) { // Firefox 브라우저
-	ev._x = ev.layerX;
-	ev._y = ev.layerY;
+	ev._x = ev.offsetX;
+	ev._y = ev.offsetY;
     }
 
     // tool의 이벤트 핸들러를 호출한다.
