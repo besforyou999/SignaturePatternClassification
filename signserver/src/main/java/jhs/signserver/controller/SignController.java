@@ -150,16 +150,15 @@ public class SignController {
            int num =Integer.parseInt(frModel);
            String result;
            switch (num){
+  	       //case 0:			// except unknown
+	       //    result="Unknown";
                case 0:
-                   result="Unknown";
-                   break;
-               case 1:
                    result="Number";
                    break;
-               case 2:
+               case 1:
                    result = "Korean";
                    break;
-               case 3:
+               case 2:
                    result = "English";
                    break;
                default:
