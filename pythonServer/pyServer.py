@@ -3,9 +3,11 @@ import base64
 import numpy as np
 from PIL import Image
 import io
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 import glob
 
+# Load keras model
+print("= Load model")
 model = load_model('signature_classification_model.h5')
 
 def save_img_as_png(msg):
@@ -53,16 +55,16 @@ def binder(client_socket, addr):
             
             print("imgArray : " , imgArray.shape)
 
-            for i in range(64):
+            for i in range(height):
                 new_row = []
-                for j in range(64):
+                for j in range(width):
                     new_row.append(imgArray[i][j][3])
                 new_col.append(new_row)
 
             test_img = np.array(new_col)
             print("test_img : ", test_img.shape)
 
-            test_img = test_img.reshape((1, width * height))
+            test_img = test_img.reshape((1, width, height, 1))
             norm_test_img = test_img.astype('float32') / 255
 
             result = model.predict(norm_test_img)
@@ -88,6 +90,9 @@ def binder(client_socket, addr):
     finally:
     # 접속이 끊기면 socket 리소스를 닫는다.
         client_socket.close();
+
+# Make socket and listen
+print("= Set server socket")
 # 소켓을 만든다.
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM);
 # 소켓 레벨과 데이터 형태를 설정한다.
@@ -98,6 +103,8 @@ server_socket.bind(('', 9999));
 # server 설정이 완료되면 listen를 시작한다.
 server_socket.listen();
     
+# Start server thread
+print("= Start thread")
 try:
     # 서버는 여러 클라이언트를 상대하기 때문에 무한 루프를 사용한다.
     while True:
