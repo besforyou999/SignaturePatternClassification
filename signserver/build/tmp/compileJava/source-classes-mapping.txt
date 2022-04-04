@@ -1,3 +1,5 @@
+jhs/signserver/service/ClientService.java
+ jhs.signserver.service.ClientService
 jhs/signserver/service/SignService.java
  jhs.signserver.service.SignService
 jhs/signserver/domain/Sign.java
