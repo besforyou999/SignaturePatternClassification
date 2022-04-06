@@ -102,7 +102,7 @@ function tool_pencil() {
 }
 
 function ev_canvas(ev) {
-    if (ev.offsetX || ev.offsetY == 0) { // Firefox 브라우저
+    if (ev.layerX || ev.layerY == 0) { // Firefox 브라우저
 	ev._x = ev.offsetX;
 	ev._y = ev.offsetY;
     }
