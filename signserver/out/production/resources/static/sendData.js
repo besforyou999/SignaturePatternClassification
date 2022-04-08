@@ -91,21 +91,24 @@ function tool_pencil() {
             context.lineTo(e._x, e._y);
             context.stroke();
 
+           coord.push([e._x, e._y]);
+
         }
     };
 
     this.touchend = function (e) {
         if (tool.started) {
             tool.touchmove(e);
+            tool.started=false;
           bodyScrollAble();
         }
     };
 }
 
 function ev_canvas(ev) {
-    if (ev.offsetX || ev.offsetY == 0) { // Firefox 브라우저
-	ev._x = ev.offsetX;
-	ev._y = ev.offsetY;
+    if (ev.layerX || ev.layerY == 0) { // Firefox 브라우저
+	ev._x = ev.layerX;
+	ev._y = ev.layerY;
     }
 
     // tool의 이벤트 핸들러를 호출한다.
