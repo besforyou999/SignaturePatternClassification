@@ -91,7 +91,6 @@ function tool_pencil() {
             context.lineTo(e._x, e._y);
             context.stroke();
 
-           coord.push([e._x, e._y]);
 
         }
     };
@@ -99,7 +98,6 @@ function tool_pencil() {
     this.touchend = function (e) {
         if (tool.started) {
             tool.touchmove(e);
-            tool.started=false;
           bodyScrollAble();
         }
     };
