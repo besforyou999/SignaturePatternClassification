@@ -1,22 +1,3 @@
-/*
-배열 SignatureData의 한 원소가 가지고 있는 데이터 ( 인덱스 순 )
-
-서명의 검은색 선이 이루는 좌표값 배열, 서명의 분류, 서명의 URL
-
-- 좌표값 배열 
-
-    좌표값 배열의 한 원소는 x,y 좌표이고 길이 2인 정수형 배열로 이루어져있다.
-    x, y값은 정수(int)이고 범위는 0 이상 300 이하
-
-- 서명의 분류
-
-    정수값 0,1,2,3 중 하나로 되어있다.
-    0 == unknown , 1 == Number , 2 == Korean, 3 == English
-
-- 서명의 URL
-
-    서명의 이미지가 URL로 저장 되어있다. ( type은 string )
-*/
 
 if (window.addEventListener) {
     window.addEventListener('load', InitEvent, false);
