@@ -17,7 +17,6 @@ function InitEvent() {
     saveBtn     = document.getElementById('SaveBtn');
     readBtn     = document.getElementById('ReadBtn');
 
-
     tool = new tool_pencil();
     canvas.addEventListener('mousedown', ev_canvas, false);
     canvas.addEventListener('mousemove', ev_canvas, false);

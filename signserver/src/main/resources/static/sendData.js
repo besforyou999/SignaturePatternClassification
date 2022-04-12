@@ -1,23 +1,3 @@
-/*
-배열 SignatureData의 한 원소가 가지고 있는 데이터 ( 인덱스 순 )
-
-서명의 검은색 선이 이루는 좌표값 배열, 서명의 분류, 서명의 URL
-
-- 좌표값 배열
-
-    좌표값 배열의 한 원소는 x,y 좌표이고 길이 2인 정수형 배열로 이루어져있다.
-    x, y값은 정수(int)이고 범위는 0 이상 300 이하
-
-- 서명의 분류
-
-    정수값 0,1,2,3 중 하나로 되어있다.
-    0 == unknown , 1 == Number , 2 == Korean, 3 == English
-
-- 서명의 URL
-
-    서명의 이미지가 URL로 저장 되어있다. ( type은 string )
-*/
-
 if (window.addEventListener) {
     window.addEventListener('load', InitEvent, false);
 }
@@ -35,8 +15,6 @@ function InitEvent() {
     clearBtn    = document.getElementById('ClearBtn');
     sendBtn     = document.getElementById('sendBtn');
 
-
-
     tool = new tool_pencil();
     canvas.addEventListener('mousedown', ev_canvas, false);
     canvas.addEventListener('mousemove', ev_canvas, false);
@@ -47,7 +25,6 @@ function InitEvent() {
     clearBtn.addEventListener('click',  onClear);
     //save -> send로 바꾸기
     sendBtn.addEventListener('click', send);
-
 }
 
 function tool_pencil() {
@@ -66,7 +43,6 @@ function tool_pencil() {
         if (tool.started) {
             context.lineTo(e._x, e._y);
             context.stroke();
-
             coord.push([e._x, e._y]);
         }
     };
@@ -83,36 +59,33 @@ function tool_pencil() {
         context.beginPath();
         context.moveTo(e._x, e._y);
         tool.started = true;
-
     };
 
     this.touchmove = function (e) {
         if (tool.started) {
             context.lineTo(e._x, e._y);
             context.stroke();
-
-
         }
     };
 
     this.touchend = function (e) {
         if (tool.started) {
             tool.touchmove(e);
-          bodyScrollAble();
+            bodyScrollAble();
         }
     };
 }
 
 function ev_canvas(ev) {
     if (ev.layerX || ev.layerY == 0) { // Firefox 브라우저
-	ev._x = ev.offsetX;
-	ev._y = ev.offsetY;
+	    ev._x = ev.offsetX;
+	    ev._y = ev.offsetY;
     }
 
     // tool의 이벤트 핸들러를 호출한다.
     var func = tool[ev.type];
     if (func) {
-	func(ev);
+	    func(ev);
     }
 }
 
@@ -120,7 +93,6 @@ function onClear() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	context.restore();
 }
-
 
 function send() {
 
@@ -133,7 +105,6 @@ function send() {
     }
 
     var file = new Blob([new Uint8Array(array)], {type: 'image/png'});
-
 
     var formdata = new FormData();
     formdata.append("file", file);
@@ -149,13 +120,11 @@ function send() {
                 $('#result').text(rslt)
                 alert(rslt); //디버깅용 나중에 완성시 지워도됩니다~~
             }
-
     });
     onClear();
 }
 
 function bodyScrollDisable(){
-
     document.body.style.overflow="hidden";
 }
 
