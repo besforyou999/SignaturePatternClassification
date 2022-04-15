@@ -8,7 +8,7 @@ import glob
 
 # Load keras model
 print("= Load model")
-model = load_model('signature_classification_model.h5')
+model = load_model('test.h5')
 
 def save_img_as_png(msg):
     image = base64.b64decode(msg)
