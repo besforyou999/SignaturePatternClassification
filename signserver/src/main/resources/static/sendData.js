@@ -4,94 +4,83 @@ if (window.addEventListener) {
 
 var form;
 var canvas, context ,tool, saveBtn, clearBtn, readBtn;
-var SignatureData = [], coord = [];
+var SignatureData = [];
+const state = {
+      mousedown: false
+    };
 
 var deleteBorderBtn;
 
 function InitEvent() {
-    form        = document.querySelector("form");
-    canvas      = document.getElementById('canvas');
-    context     = canvas.getContext('2d');
-    clearBtn    = document.getElementById('ClearBtn');
-    sendBtn     = document.getElementById('sendBtn');
+    form            = document.querySelector("form");
+    canvas          = document.getElementById('canvas');
+    canvasContext   = canvas.getContext('2d');
+    clearBtn        = document.getElementById('ClearBtn');
+    sendBtn         = document.getElementById('sendBtn');
 
-    tool = new tool_pencil();
-    canvas.addEventListener('mousedown', ev_canvas, false);
-    canvas.addEventListener('mousemove', ev_canvas, false);
-    canvas.addEventListener('mouseup', ev_canvas, false);
-    canvas.addEventListener('touchstart', ev_canvas, false);
-    canvas.addEventListener('touchmove', ev_canvas, false);
-    canvas.addEventListener('touchend', ev_canvas, false);
+    //tool = new tool_pencil();
+    canvas.addEventListener('mousedown', handleWritingStart);
+    canvas.addEventListener('mousemove', handleWritingInProgress);
+    canvas.addEventListener('mouseup', handleDrawingEnd);
+    canvas.addEventListener('touchstart',  handleWritingStart);
+    canvas.addEventListener('touchmove', handleWritingInProgress);
+    canvas.addEventListener('touchend', handleDrawingEnd);
     clearBtn.addEventListener('click',  onClear);
     //save -> send로 바꾸기
     sendBtn.addEventListener('click', send);
 }
 
-function tool_pencil() {
-    var tool = this;
-    this.started = false;
+function handleWritingStart(event) {
+  event.preventDefault();
 
-    this.mousedown = function (e) {
-        context.beginPath();
-        context.moveTo(e._x, e._y);
-        tool.started = true;
+  const mousePos = getMousePositionOnCanvas(event);
 
-        coord.push([e._x, e._y]);
-    };
+  canvasContext.beginPath();
 
-    this.mousemove = function(e) {
-        if (tool.started) {
-            context.lineTo(e._x, e._y);
-            context.stroke();
-            coord.push([e._x, e._y]);
-        }
-    };
+  canvasContext.moveTo(mousePos.x, mousePos.y);
 
-    this.mouseup = function (e) {
-        if (tool.started) {
-            tool.mousemove(e);
-            tool.started = false;
-        }
-    };
+  canvasContext.fill();
 
-    this.touchstart = function (e) {
-        bodyScrollDisable();
-        context.beginPath();
-        context.moveTo(e._x, e._y);
-        tool.started = true;
-    };
-
-    this.touchmove = function (e) {
-        if (tool.started) {
-            context.lineTo(e._x, e._y);
-            context.stroke();
-        }
-    };
-
-    this.touchend = function (e) {
-        if (tool.started) {
-            tool.touchmove(e);
-            bodyScrollAble();
-        }
-    };
+  state.mousedown = true;
 }
 
-function ev_canvas(ev) {
-    if (ev.layerX || ev.layerY == 0) { // Firefox 브라우저
-	    ev._x = ev.offsetX;
-	    ev._y = ev.offsetY;
-    }
+function handleWritingInProgress(event) {
+  event.preventDefault();
 
-    // tool의 이벤트 핸들러를 호출한다.
-    var func = tool[ev.type];
-    if (func) {
-	    func(ev);
-    }
+  if (state.mousedown) {
+    const mousePos = getMousePositionOnCanvas(event);
+
+    canvasContext.lineTo(mousePos.x, mousePos.y);
+    canvasContext.stroke();
+  }
 }
+
+function handleDrawingEnd(event) {
+  event.preventDefault();
+
+  if (state.mousedown) {
+    canvasContext.stroke();
+  }
+
+  state.mousedown = false;
+}
+
+
+function getMousePositionOnCanvas(event){
+    const clientX =event.clientX || event.touches[0].clientX;
+    const clientY = event.clientY || event.touches[0].clientY;
+    const {offsetLeft, offsetTop} = event.target;
+    const canvasX=clientX-offsetLeft;
+    const canvasY=clientY-offsetTop;
+
+    return {x: canvasX, y: canvasY};
+
+}
+
 
 function onClear() {
-	context.clearRect(0, 0, canvas.width, canvas.height);
-	context.restore();
+	canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+	canvasContext.restore();
 }
 
 function send() {
@@ -124,12 +113,5 @@ function send() {
     onClear();
 }
 
-function bodyScrollDisable(){
-    document.body.style.overflow="hidden";
-}
-
-function bodyScrollAble(){
-    document.body.style.overflow="auto";
-}
 
 
