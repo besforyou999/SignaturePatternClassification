@@ -146,4 +146,15 @@ public class SignController {
         model.addAttribute("list", list);
         return "redirect:/";
     }
+
+
+
+
+    @RequestMapping("/sendPersonal")
+    @ResponseBody
+    public String sendPersonal(@RequestParam(value="file") MultipartFile [] file, Model model ) {
+
+
+        return null;
+    }
 }
