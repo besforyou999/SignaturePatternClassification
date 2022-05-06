@@ -21,4 +21,7 @@ public class MainController {
     public String sendDataPage() {
         return "sendData";
     }
+
+    @RequestMapping("/personalData")
+    public String personalDataPage(){return "personalData";}
 }
