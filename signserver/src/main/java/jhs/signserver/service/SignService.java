@@ -1,6 +1,8 @@
 package jhs.signserver.service;
 
 import jhs.signserver.domain.Sign;
+import jhs.signserver.domain.SignOne;
+import jhs.signserver.domain.SignWord;
 import jhs.signserver.repository.SignRepository;
 
 import javax.transaction.Transactional;
@@ -24,6 +26,13 @@ public class SignService {
     //전체 사인 조회
     public List<Sign> findSigns(){
         return signRepository.findAll();
+    }
+
+    public List<SignOne> getSignOneDB(){
+        return signRepository.getSignOneDB();
+    }
+    public List<SignWord> getSignWordDB(){
+        return signRepository.getSignWordDB();
     }
 
     public Optional<Sign> findOne(Long signId){

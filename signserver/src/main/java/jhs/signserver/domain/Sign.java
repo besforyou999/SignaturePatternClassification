@@ -1,12 +1,10 @@
 package jhs.signserver.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
+@Table(name="sign")
 public class Sign {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

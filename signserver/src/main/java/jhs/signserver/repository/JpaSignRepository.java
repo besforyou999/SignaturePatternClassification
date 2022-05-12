@@ -1,6 +1,8 @@
 package jhs.signserver.repository;
 
 import jhs.signserver.domain.Sign;
+import jhs.signserver.domain.SignOne;
+import jhs.signserver.domain.SignWord;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -36,6 +38,15 @@ public class JpaSignRepository implements SignRepository {
     @Override
     public List<Sign> findAll() {
         return em.createQuery("select m from Sign m order by id DESC", Sign.class).getResultList();
+    }
+
+    @Override
+    public List<SignOne> getSignOneDB(){
+        return em.createQuery("select m from SignOne m order by id DESC", SignOne.class).getResultList();
+    }
+    @Override
+    public List<SignWord> getSignWordDB(){
+        return em.createQuery("select m from SignWord m order by id DESC", SignWord.class).getResultList();
     }
 
     @Override

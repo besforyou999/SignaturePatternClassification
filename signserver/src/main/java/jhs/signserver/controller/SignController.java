@@ -1,6 +1,8 @@
 package jhs.signserver.controller;
 
 import jhs.signserver.domain.Sign;
+import jhs.signserver.domain.SignOne;
+import jhs.signserver.domain.SignWord;
 import jhs.signserver.service.ClientService;
 import jhs.signserver.service.SignService;
 import org.slf4j.Logger;
@@ -42,6 +44,32 @@ public class SignController {
         model.addAttribute("list", list);
 
         return "dataList";
+    }
+
+
+
+    @GetMapping("/signCurrentDB")
+    public String getCurrentDB(Model model) throws Exception {
+        List<Sign> list = signService.findSigns();
+        model.addAttribute("list", list);
+
+        return "showDBList";
+    }
+
+    @GetMapping("/signOneDB")
+    public String getSignOneDB(Model model) throws Exception {
+        List<SignOne> list = signService.getSignOneDB();
+        model.addAttribute("list", list);
+
+        return "showDBList";
+    }
+
+    @GetMapping("/signWordDB")
+    public String getSignWordDB(Model model) throws Exception {
+        List<SignWord> list = signService.getSignWordDB();
+        model.addAttribute("list", list);
+
+        return "showDBList";
     }
 
     @RequestMapping("/returnToMain")
