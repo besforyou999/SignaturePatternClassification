@@ -35,7 +35,7 @@ public class JpaSignRepository implements SignRepository {
 
     @Override
     public List<Sign> findAll() {
-        return em.createQuery("select m from Sign m", Sign.class).getResultList();
+        return em.createQuery("select m from Sign m order by id DESC", Sign.class).getResultList();
     }
 
     @Override

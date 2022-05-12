@@ -24,4 +24,13 @@ public class MainController {
 
     @RequestMapping("/personalData")
     public String personalDataPage(){return "personalData";}
+
+    @RequestMapping("/signClassification")
+    public String classificationPage(){ return "classification";}
+
+    @RequestMapping("/signAuthentication")
+    public String authenticationPage(){ return "authentication";}
+
+    @RequestMapping("/signDatabase")
+    public String databasePage(){ return "signDatabase";}
 }
