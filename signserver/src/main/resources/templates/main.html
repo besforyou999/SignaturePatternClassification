@@ -8,17 +8,18 @@
     <body>
         <h1> Welcome to JHS A.I Main Page</h1>
         <div>
-            <form action="/newData" method="post">
-                <input class="btn" type="submit" id="createData" value="Create Page">
+            <form action="/signClassification" method="post">
+                <input class="btn" type="submit" id="classification" value="서명 분류">
             </form>
 
-            <form action="/sendData" method="post">
-                <input class="btn" type="submit" id="sendData" value="Send Page">
+            <form action="/signAuthentication" method="post">
+                <input class="btn" type="submit" id="authentication" value="서명 인식">
             </form>
 
-            <form action="/personalData" method="post">
-            <input class="btn" type="submit" id="personalData" value="Personal Sign Page">
+            <form action="/signDatabase" method="post">
+                <input class="btn" type="submit" id="database" value="데이터 확인">
             </form>
+
         </div>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

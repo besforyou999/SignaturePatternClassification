@@ -32,6 +32,7 @@ function InitEvent() {
 var isFirst = true;
 
 var signData = new Object();
+signData.cnt=0;
 var today = new Date();
 var xArray = new Array();
 var yArray= new Array();
@@ -39,7 +40,8 @@ var timeArray = new Array();
 var frstArray = new Array();
 
 var timer;
-// 인터페이스 수정..
+var inputCnt;
+// 서명 시작
 function handleWritingStart(event) {
   event.preventDefault();
 
@@ -48,21 +50,16 @@ function handleWritingStart(event) {
   canvasContext.moveTo(mousePos.x, mousePos.y);
   canvasContext.fill();
 
-  signData.cnt=1;
+  signData.cnt++;
   xArray.push(mousePos.x);
   yArray.push(mousePos.y);
-  timeArray.push(Math.ceil(Date.now()/10)*10);
+  timeArray.push(Date.now());
   frstArray.push(0);
-
-
-
-   //setTimeout(()=>{clearInterval(timer); alert('시간 초과!');}, 5000)
-
-    //  frstArray.push(1);
-
   state.mousedown = true;
+  //새로운 획마다 inputCnt 초기화
+  inputCnt=0;
 }
-
+//서명 중
 function handleWritingInProgress(event) {
   event.preventDefault();
 
@@ -70,32 +67,28 @@ function handleWritingInProgress(event) {
     const mousePos = getMousePositionOnCanvas(event);
     canvasContext.lineTo(mousePos.x, mousePos.y);
     canvasContext.stroke();
-
-    timer = setInterval(arrayPush(event), 10);
-
+    inputCnt++;
+    if(inputCnt%8==0)
+        arrayPush(event);
   }
 }
+//배열에 값 넣는 함수
 function arrayPush(event){
-       event.preventDefault();
-
-       if(state.mousedown){
        const mousePos = getMousePositionOnCanvas(event);
-
        signData.cnt++;
        xArray.push(mousePos.x);
        yArray.push(mousePos.y);
        timeArray.push(Date.now());
        frstArray.push(1);
-       }
-}
 
+}
+// 마우스 뗄 때
 function handleDrawingEnd(event) {
   event.preventDefault();
 
   if (state.mousedown) {
     canvasContext.stroke();
   }
-
     signData.xPos=xArray;
     signData.yPos=yArray;
     signData.time=timeArray;
@@ -121,8 +114,6 @@ function getMousePositionOnCanvas(event){
 function onClear() {
 	canvasContext.clearRect(0, 0, canvas.width, canvas.height);
 	canvasContext.restore();
-
-	clearInterval(timer);
 }
 
 function send() {
@@ -139,8 +130,10 @@ function send() {
             }
     });*/
     console.log(signData);
-    signData=new Object();
-    clearInterval(timer);
+    alert("아직 개발 중..");
+    //    signData=new Object();
+    delete signData;
+    //clearInterval(timer);
     onClear();
 }
 
