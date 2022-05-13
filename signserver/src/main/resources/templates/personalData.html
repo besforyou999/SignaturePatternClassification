@@ -14,12 +14,18 @@
 </div>
 
 <button class = "btn" id = 'ClearBtn'>Screen Clear</button>
-<button class = "btn" id = 'sendBtn'>Send</button>
+<button class = "btn" id = 'registerBtn'>Register</button>
 
-<table>
+<div>
+<input type="text" id="name" name="nameInput"
+       placeholder="이름(한글 혹은 영어)"
+       oninput="this.value = this.value.replace(/[^ㄱ-힣a-zA-Z]/g, '')">
+<button class = "btn" id = 'sendBtn'>Send</button>
+</div>
+<!--<table>
     <th><h5>결과 : </h5></th>
     <th><span id="result" style="color:red"></span></th>
-</table>
+</table>-->
 
 <form action="/signAuthentication" method="Get">
     <input class="btn" type="submit" id="toAuthentication" value="Back">

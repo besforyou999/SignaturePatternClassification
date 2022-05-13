@@ -3,6 +3,7 @@ package jhs.signserver.controller;
 import jhs.signserver.domain.Sign;
 import jhs.signserver.domain.SignOne;
 import jhs.signserver.domain.SignWord;
+import jhs.signserver.service.AuthenticationService;
 import jhs.signserver.service.ClientService;
 import jhs.signserver.service.SignService;
 import org.slf4j.Logger;
@@ -19,10 +20,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class SignController {
@@ -31,11 +35,13 @@ public class SignController {
 
     private final SignService signService;
     private final ClientService clientService;
+    private final AuthenticationService authenticationService;
 
     @Autowired
-    public SignController(SignService signService, ClientService clientService) {
+    public SignController(SignService signService, ClientService clientService, AuthenticationService authenticationService) {
         this.signService = signService;
         this.clientService = clientService;
+        this.authenticationService = authenticationService;
     }
 
     @GetMapping("/dataList")
@@ -176,13 +182,26 @@ public class SignController {
     }
 
 
-
-
     @RequestMapping("/sendPersonal")
-    @ResponseBody
-    public String sendPersonal(@RequestParam(value="file") MultipartFile [] file, Model model ) {
+    public String sendPersonal(@RequestBody Object obj) throws IOException {
+        logger.info(obj.toString());
+        byte[] bytes = convertObjectToBytes(obj);
+        String s = Base64.getEncoder().encodeToString(bytes);
+        authenticationService.registerSign(s);
 
+        return "redirect:/";
+    }
 
-        return null;
+    public static byte[] convertObjectToBytes(Object obj) throws IOException {
+        ByteArrayOutputStream boas = new ByteArrayOutputStream();
+        try (ObjectOutputStream ois = new ObjectOutputStream(boas)) {
+            ois.writeObject(obj);
+            return boas.toByteArray();
+        }catch (Exception e){
+            System.out.println("get Byte error!");
+            return null;
+        }
     }
 }
+
+
