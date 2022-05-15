@@ -16,7 +16,7 @@ public class AuthenticationService {
 
     public void registerSign(String encoded_str) {
         try (Socket client = new Socket()) {
-            InetSocketAddress ipep = new InetSocketAddress("", 7680);
+            InetSocketAddress ipep = new InetSocketAddress("", 9990);
 
             client.connect(ipep);
 

@@ -182,14 +182,21 @@ public class SignController {
     }
 
 
-    @RequestMapping("/sendPersonal")
-    public String sendPersonal(@RequestBody Object obj) throws IOException {
+    @RequestMapping("/registerDataDB")
+    public String registerData(@RequestBody Object obj) throws IOException {
         logger.info(obj.toString());
         byte[] bytes = convertObjectToBytes(obj);
         String s = Base64.getEncoder().encodeToString(bytes);
         authenticationService.registerSign(s);
 
         return "redirect:/";
+    }
+
+    //구현 해야함... service도 추가로
+    @RequestMapping("/confirmDataDB")
+    public  String confirmData(){
+
+        return null;
     }
 
     public static byte[] convertObjectToBytes(Object obj) throws IOException {

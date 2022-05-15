@@ -22,8 +22,12 @@ public class MainController {
         return "sendData";
     }
 
-    @RequestMapping("/personalData")
-    public String personalDataPage(){return "personalData";}
+    @RequestMapping("/registerData")
+    public String dataRegisterPage(){return "registerData";}
+
+
+    @RequestMapping("/confirmData")
+    public String dataConfirmPage(){return "confirmData";}
 
     @RequestMapping("/signClassification")
     public String classificationPage(){ return "classification";}
