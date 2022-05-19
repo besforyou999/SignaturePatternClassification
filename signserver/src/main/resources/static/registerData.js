@@ -155,7 +155,7 @@ function send() {
 
     $.ajax({
             type : 'post',
-            url : '/registerData',
+            url : '/registerDataDB',
             data : JSON.stringify(sendData),
             processData : false,
             dataType:'json',
