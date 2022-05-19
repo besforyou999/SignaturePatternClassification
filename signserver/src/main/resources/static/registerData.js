@@ -153,9 +153,10 @@ function send() {
     //sendData.append("signData", Object.values(sendData));
     //console.log(JSON.stringify(signData));
 
+
     $.ajax({
             type : 'post',
-            url : '/registerData',
+            url : '/registerDataDB',
             data : JSON.stringify(sendData),
             processData : false,
             dataType:'json',
