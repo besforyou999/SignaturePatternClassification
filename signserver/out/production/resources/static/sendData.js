@@ -1,128 +1,87 @@
-/*
-배열 SignatureData의 한 원소가 가지고 있는 데이터 ( 인덱스 순 )
-
-서명의 검은색 선이 이루는 좌표값 배열, 서명의 분류, 서명의 URL
-
-- 좌표값 배열
-
-    좌표값 배열의 한 원소는 x,y 좌표이고 길이 2인 정수형 배열로 이루어져있다.
-    x, y값은 정수(int)이고 범위는 0 이상 300 이하
-
-- 서명의 분류
-
-    정수값 0,1,2,3 중 하나로 되어있다.
-    0 == unknown , 1 == Number , 2 == Korean, 3 == English
-
-- 서명의 URL
-
-    서명의 이미지가 URL로 저장 되어있다. ( type은 string )
-*/
-
 if (window.addEventListener) {
     window.addEventListener('load', InitEvent, false);
 }
 
 var form;
 var canvas, context ,tool, saveBtn, clearBtn, readBtn;
-var SignatureData = [], coord = [];
+var SignatureData = [];
+const state = {
+      mousedown: false
+    };
 
 var deleteBorderBtn;
 
 function InitEvent() {
-    form        = document.querySelector("form");
-    canvas      = document.getElementById('canvas');
-    context     = canvas.getContext('2d');
-    clearBtn    = document.getElementById('ClearBtn');
-    sendBtn     = document.getElementById('sendBtn');
+    form            = document.querySelector("form");
+    canvas          = document.getElementById('canvas');
+    canvasContext   = canvas.getContext('2d');
+    clearBtn        = document.getElementById('ClearBtn');
+    sendBtn         = document.getElementById('sendBtn');
 
-
-
-    tool = new tool_pencil();
-    canvas.addEventListener('mousedown', ev_canvas, false);
-    canvas.addEventListener('mousemove', ev_canvas, false);
-    canvas.addEventListener('mouseup', ev_canvas, false);
-    canvas.addEventListener('touchstart', ev_canvas, false);
-    canvas.addEventListener('touchmove', ev_canvas, false);
-    canvas.addEventListener('touchend', ev_canvas, false);
+    //tool = new tool_pencil();
+    canvas.addEventListener('mousedown', handleWritingStart);
+    canvas.addEventListener('mousemove', handleWritingInProgress);
+    canvas.addEventListener('mouseup', handleDrawingEnd);
+    canvas.addEventListener('touchstart',  handleWritingStart);
+    canvas.addEventListener('touchmove', handleWritingInProgress);
+    canvas.addEventListener('touchend', handleDrawingEnd);
     clearBtn.addEventListener('click',  onClear);
     //save -> send로 바꾸기
     sendBtn.addEventListener('click', send);
+}
+
+function handleWritingStart(event) {
+  event.preventDefault();
+
+  const mousePos = getMousePositionOnCanvas(event);
+
+  canvasContext.beginPath();
+
+  canvasContext.moveTo(mousePos.x, mousePos.y);
+
+  canvasContext.fill();
+
+  state.mousedown = true;
+}
+
+function handleWritingInProgress(event) {
+  event.preventDefault();
+
+  if (state.mousedown) {
+    const mousePos = getMousePositionOnCanvas(event);
+
+    canvasContext.lineTo(mousePos.x, mousePos.y);
+    canvasContext.stroke();
+  }
+}
+
+function handleDrawingEnd(event) {
+  event.preventDefault();
+
+  if (state.mousedown) {
+    canvasContext.stroke();
+  }
+
+  state.mousedown = false;
+}
+
+
+function getMousePositionOnCanvas(event){
+    const clientX =event.clientX || event.touches[0].clientX;
+    const clientY = event.clientY || event.touches[0].clientY;
+    const {offsetLeft, offsetTop} = event.target;
+    const canvasX=clientX-offsetLeft;
+    const canvasY=clientY-offsetTop;
+
+    return {x: canvasX, y: canvasY};
 
 }
 
-function tool_pencil() {
-    var tool = this;
-    this.started = false;
-
-    this.mousedown = function (e) {
-        context.beginPath();
-        context.moveTo(e._x, e._y);
-        tool.started = true;
-
-        coord.push([e._x, e._y]);
-    };
-
-    this.mousemove = function(e) {
-        if (tool.started) {
-            context.lineTo(e._x, e._y);
-            context.stroke();
-
-            coord.push([e._x, e._y]);
-        }
-    };
-
-    this.mouseup = function (e) {
-        if (tool.started) {
-            tool.mousemove(e);
-            tool.started = false;
-        }
-    };
-
-    this.touchstart = function (e) {
-        bodyScrollDisable();
-        context.beginPath();
-        context.moveTo(e._x, e._y);
-        tool.started = true;
-
-    };
-
-    this.touchmove = function (e) {
-        if (tool.started) {
-            context.lineTo(e._x, e._y);
-            context.stroke();
-
-           coord.push([e._x, e._y]);
-
-        }
-    };
-
-    this.touchend = function (e) {
-        if (tool.started) {
-            tool.touchmove(e);
-            tool.started=false;
-          bodyScrollAble();
-        }
-    };
-}
-
-function ev_canvas(ev) {
-    if (ev.layerX || ev.layerY == 0) { // Firefox 브라우저
-	ev._x = ev.layerX;
-	ev._y = ev.layerY;
-    }
-
-    // tool의 이벤트 핸들러를 호출한다.
-    var func = tool[ev.type];
-    if (func) {
-	func(ev);
-    }
-}
 
 function onClear() {
-	context.clearRect(0, 0, canvas.width, canvas.height);
-	context.restore();
+	canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+	canvasContext.restore();
 }
-
 
 function send() {
 
@@ -135,7 +94,6 @@ function send() {
     }
 
     var file = new Blob([new Uint8Array(array)], {type: 'image/png'});
-
 
     var formdata = new FormData();
     formdata.append("file", file);
@@ -151,18 +109,10 @@ function send() {
                 $('#result').text(rslt)
                 alert(rslt); //디버깅용 나중에 완성시 지워도됩니다~~
             }
-
     });
     onClear();
 }
 
-function bodyScrollDisable(){
 
-    document.body.style.overflow="hidden";
-}
-
-function bodyScrollAble(){
-    document.body.style.overflow="auto";
-}
 
 

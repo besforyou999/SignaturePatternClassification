@@ -1,4 +1,3 @@
-
 function deleteImg(id) {
     $.ajax({
         type : 'post',

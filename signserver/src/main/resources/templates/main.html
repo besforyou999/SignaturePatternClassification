@@ -3,24 +3,30 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
     <head>
         <title>JHS AI Main</title>
-        <link rel="stylesheet" href="styles.css?ver=1">
+        <link rel="stylesheet" href="styles.css?ver=5">
     </head>
     <body>
-        <h1> Welcome to JHS A.I Main Page</h1>
-        <div>
-            <form action="/signClassification" method="post">
-                <input class="btn" type="submit" id="classification" value="서명 분류">
-            </form>
+    <div class="wrapper">
+        <div class="mainPanel">
 
-            <form action="/signAuthentication" method="post">
-                <input class="btn" type="submit" id="authentication" value="서명 인식">
-            </form>
+            <h1 align="center"> Welcome to JHS A.I Main Page</h1>
+            <h3 align="center"> Select what to do</h3>
 
-            <form action="/signDatabase" method="post">
-                <input class="btn" type="submit" id="database" value="데이터 확인">
-            </form>
+            <div class="mainBtn">
+                <form action="/signClassification" method="post">
+                    <input class="btn" type="submit" id="classification" value="서명 분류">
+                </form>
 
+                <form action="/signAuthentication" method="post">
+                    <input class="btn" type="submit" id="authentication" value="서명 인식">
+                </form>
+
+                <form action="/signDatabase" method="post">
+                    <input class="btn" type="submit" id="database" value="데이터 확인">
+                </form>
+            </div>
         </div>
+    </div>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src='main.js?ver=22'></script>

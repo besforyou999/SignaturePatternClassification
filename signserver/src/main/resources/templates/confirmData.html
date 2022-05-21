@@ -3,32 +3,79 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <head>
   <title>Confirm Sign Data</title>
-  <link rel="stylesheet" href="styles.css?ver=1">
+    <!-- <link rel="stylesheet" href="styles.css?ver=1"> -->
+  <style>
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        min-height: 100vh;
+        align-items: center;
+    }
+
+    .confirmData {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-evenly;
+        background-color: #C0C0C0;
+        margin:50px;
+        padding:50px;
+        width:50%;
+        height:50%;
+    }
+
+    #canvas {
+        margin: 20px;
+        background:white;
+        border: thin solid #aaaaaa;
+    }
+
+    .btn {
+        margin: 10px;
+        font-size: 25px;
+        padding: 10px 10px;
+    }
+
+    #name {
+        width: 240px;
+        height : 50px;
+        font-size: 25px;
+    }
+
+  </style>
 </head>
 <body>
-<h1>Confirm Sign Data Page</h1>
-<div>
-  <canvas id ='canvas' width='256' height='256'>
-    Canvas not supported
-  </canvas>
-</div>
+  <div class="wrapper">
+    <div class="confirmData">
+      <div>
+        <h1>Confirm Sign Data Page</h1>
+      </div>
+      <div>
+        <canvas id ='canvas' width='256' height='256'>
+          Canvas not supported
+        </canvas>
+      </div>
 
-<div>
-  <input type="text" id="name" name="nameInput"
-         placeholder="이름(한글 혹은 영어)"
-         oninput="this.value = this.value.replace(/[^ㄱ-힣a-zA-Z]/g, '')">
-  <button class = "btn" id = 'sendBtn'>Send</button>
-</div>
+      <div>
+        <button class = "btn" id = 'ClearBtn'>Screen Clear</button>
+      </div>
 
-<button class = "btn" id = 'ClearBtn'>Screen Clear</button>
+      <div>
+        <input type="text" id="name" name="nameInput"
+               placeholder="이름(한글 혹은 영어)"
+               oninput="this.value = this.value.replace(/[^ㄱ-힣a-zA-Z]/g, '')">
+        <button class = "btn" id = 'sendBtn'>Send</button>
+      </div>
 
-
-
-<form action="/signAuthentication" method="Get">
-  <input class="btn" type="submit" id="toAuthentication" value="Back">
-</form>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src='confirmData.js?ver=22'></script>
+      <div>
+        <form action="/signAuthentication" method="Get">
+          <input class="btn" type="submit" id="toAuthentication" value="Back">
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src='confirmData.js?ver=22'></script>
 </body>
 </html>

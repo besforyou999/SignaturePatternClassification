@@ -1,24 +1,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
-<head>
-    <title>JHS AI Main</title>
-    <link rel="stylesheet" href="styles.css?ver=1">
-</head>
-<body>
-<h1> Welcome to JHS A.I Main Page</h1>
-<div>
-<form action="/newData" method="post">
-    <input class="btn" type="submit" id="createData" value="Create Page">
-</form>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+    <head>
+        <title>JHS AI Main</title>
+        <link rel="stylesheet" href="styles.css?ver=5">
+    </head>
+    <body>
+    <div class="wrapper">
+        <div class="mainPanel">
 
-<form action="/sendData" method="post">
-    <input class="btn" type="submit" id="sendData" value="Send Page">
-</form>
-</div>
-<!-- <button class = "read" id = 'deleteBorder'>Delete Border</button>-->
+            <h1 align="center"> Welcome to JHS A.I Main Page</h1>
+            <h3 align="center"> Select what to do</h3>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src='main.js?ver=22'></script>
+            <div class="mainBtn">
+                <form action="/signClassification" method="post">
+                    <input class="btn" type="submit" id="classification" value="서명 분류">
+                </form>
 
-</body>
+                <form action="/signAuthentication" method="post">
+                    <input class="btn" type="submit" id="authentication" value="서명 인식">
+                </form>
+
+                <form action="/signDatabase" method="post">
+                    <input class="btn" type="submit" id="database" value="데이터 확인">
+                </form>
+            </div>
+        </div>
+    </div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src='main.js?ver=22'></script>
+    </body>
 </html>
