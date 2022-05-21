@@ -1,23 +1,41 @@
-body {
-    background-color: lightgray;
-}
-
 .radioBtn {
     margin-left: 15px;
     margin-bottom: 15px;
 }
 
-
 .btn {
     margin: 10px;
-    font-size: 20px;
+    font-size: 30px;
     padding: 10px 10px;
 }
-
-
 
 #canvas {
     margin: 20px;
     background:white;
     border: thin solid #aaaaaa;
 }
+
+.mainBtn {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.mainPanel {
+    margin: 20px;
+    padding: 20px;
+    width: 50%;
+    height: 50%;
+    background-color: #C0C0C0;
+    border: 1px black;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+}
+

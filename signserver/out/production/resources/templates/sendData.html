@@ -1,32 +1,88 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8" >
-<head>
-  <title>Send Data to AI Model</title>
-  <link rel="stylesheet" href="styles.css?ver=1">
-</head>
-<body>
-<h1>Send Data</h1>
-<div>
-  <canvas id ='canvas' width='256' height='256'>
-    Canvas not supported
-  </canvas>
-</div>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+    <head>
+        <title>Send Data to AI Model</title>
+        <!-- <link rel="stylesheet" href="styles.css?ver=1"> -->
+        <style>
+             .wrapper {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                min-height: 100vh;
+                align-items: center;
+            }
 
+            .sendData {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                justify-content: space-evenly;
+                background-color: #C0C0C0;
+                margin:50px;
+                padding:50px;
+                width:50%;
+                height:50%;
+            }
 
-<button class = "btn" id = 'ClearBtn'>Screen Clear</button>
+            #canvas {
+                margin: 20px;
+                background:white;
+                border: thin solid #aaaaaa;
+            }
 
-<button class = "btn" id = 'sendBtn'>Send</button>
+            .flex-item {
+                margin : 5px;
+            }
 
-<table>
-  <th><h5>결과 : </h5></th>
-  <th><span id="result" style="color:red"></span></th>
-</table>
-<form action="/" method="Get">
-  <input class="btn" type="submit" id="toMain" value="Back">
-</form>
+            .buttons {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-evenly;
+            }
 
+            .btn {
+                margin: 10px;
+                font-size: 25px;
+                padding: 10px 10px;
+            }
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src='sendData.js?ver=22'></script>
-</body>
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="sendData">
+                <div class="flex-item">
+                    <h1>Send Data</h1>
+                </div>
+
+                <div class="flex-item">
+                  <canvas id ='canvas' width='256' height='256'>
+                    Canvas not supported
+                  </canvas>
+                </div>
+
+                <div class="buttons">
+                    <button class = "btn" id = 'ClearBtn'>Screen Clear</button>
+                    <button class = "btn" id = 'sendBtn'>Send</button>
+                </div>
+
+                <div class="flex-item">
+                    <table width="100">
+                        <th><h3>결과  : </h3></th>
+                        <th><span id="result" style="color:red"></span></th>
+                    </table>
+                </div>
+
+                <div class="flex-item">
+                    <form action="/signClassification" method="Get">
+                        <input class="btn" type="submit" id="toMain" value="Back">
+                    </form>
+                </div>
+
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                <script src='sendData.js?ver=22'></script>
+            </div>
+        </div>
+    </body>
 </html>

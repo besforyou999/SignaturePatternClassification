@@ -1,35 +1,83 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<head>
-  <title>JHS AI Database</title>
-  <link rel="stylesheet" href="styles.css?ver=1">
-</head>
-<body>
 
-<h1>학습 데이터 조회</h1>
+  <head>
+    <title>JHS AI Database</title>
+    <!-- <link rel="stylesheet" href="styles.css?ver=1"> -->
+    <style>
+      .wrapper {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          min-height: 100vh;
+          align-items: center;
+      }
 
-<div>
+      .signDatabase {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: space-evenly;
+          background-color: #C0C0C0;
+          margin:50px;
+          padding:50px;
+          width:50%;
+          height:50%;
+      }
 
-  <form action="/signCurrentDB" method="Get">
-    <input class="btn" type="submit" id="toCurrentDB" value=" 사용중인 DB 조회 ">
-  </form>
+      #canvas {
+        margin: 20px;
+        background:white;
+        border: thin solid #aaaaaa;
+      }
 
-  <form action="/signOneDB" method="Get">
-    <input class="btn" type="submit" id="toOneDB" value="  한 글자 DB 조회  ">
-  </form>
+     .btn {
+          margin: 10px;
+          font-size: 25px;
+          padding: 10px 10px;
+      }
 
-  <form action="/signWordDB" method="Get">
-    <input class="btn" type="submit" id="toWordDB" value="여러 글자 DB 조회">
-  </form>
+      .DBAccessButtons {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
 
+    </style>
+  </head>
 
-  <form action="/" method="Get">
-    <input class="btn" type="submit" id="toMain" value="Back">
-  </form>
-</div>
+  <body>
+  <div class="wrapper">
+    <div class="signDatabase">
+      <div>
+          <h1>학습 데이터 조회</h1>
+      </div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src='main.js?ver=22'></script>
-</body>
+      <div class = "DBAccessButtons">
+        <form action="/signCurrentDB" method="Get">
+          <input class="btn" type="submit" id="toCurrentDB" value=" 사용중인 DB 조회 ">
+        </form>
+
+        <form action="/signOneDB" method="Get">
+          <input class="btn" type="submit" id="toOneDB" value="  한 글자 DB 조회  ">
+        </form>
+
+        <form action="/signWordDB" method="Get">
+          <input class="btn" type="submit" id="toWordDB" value="여러 글자 DB 조회">
+        </form>
+      </div>
+
+      <div>
+        <form action="/" method="Get">
+          <input class="btn" type="submit" id="toMain" value="Back">
+        </form>
+      </div>
+
+    </div>
+  </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src='main.js?ver=22'></script>
+  </body>
 </html>
