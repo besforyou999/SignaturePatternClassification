@@ -1,0 +1,64 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<head>
+  <title>JHS AI Classification</title>
+  <!-- <link rel="stylesheet" href="classification.css?ver=1"> -->
+  <style>
+    .classification {
+      margin:20px;
+      padding:20px;
+      width:50%;
+      height:50%;
+      background-color: #C0C0C0;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+
+    .btn {
+        margin: 40px;
+        font-size: 30px;
+        padding: 10px 10px;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="classification">
+      <h1> Classification </h1>
+
+      <div class="buttons">
+        <form action="/newData" method="post">
+          <input class="btn" type="submit" id="createData" value="데이터 생성">
+        </form>
+
+        <form action="/sendData" method="post">
+          <input class="btn" type="submit" id="sendData" value="데이터 전송">
+        </form>
+
+        <form action="/" method="Get">
+          <input class="btn" type="submit" id="toMain" value="Back">
+        </form>
+      </div>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    </div>
+  </div>
+</body>
+</html>

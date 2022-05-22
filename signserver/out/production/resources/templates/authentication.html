@@ -1,0 +1,65 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+  <head>
+    <title>JHS AI Authentication</title>
+    <!-- <link rel="stylesheet" href="styles.css?ver=1"> -->
+    <style>
+      .authentication {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-evenly;
+        background-color: #C0C0C0;
+        margin:50px;
+        padding:50px;
+        width:50%;
+        height:50%;
+      }
+
+      .wrapper {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          min-height: 100vh;
+          align-items: center;
+      }
+
+      .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+
+      .btn {
+          margin: 30px;
+          font-size: 25px;
+          padding: 10px 10px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="authentication">
+        <div class="flex-item">
+          <h1> Authentication </h1>
+        </div>
+        <div class="buttons">
+          <form action="/registerData" method="post">
+            <input class="btn" type="submit" id="registerData" value="Personal Sign Register Page">
+          </form>
+
+          <form action="/confirmData" method="post">
+            <input class="btn" type="submit" id="confirmData" value="Personal Confirm Page">
+          </form>
+
+          <form action="/" method="Get">
+            <input class="btn" type="submit" id="toMain" value="Back">
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  </body>
+</html>
