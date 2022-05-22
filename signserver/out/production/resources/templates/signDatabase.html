@@ -5,6 +5,7 @@
   <head>
     <title>JHS AI Database</title>
     <!-- <link rel="stylesheet" href="styles.css?ver=1"> -->
+    <link rel="stylesheet" href="/css/bootstrap.css">
     <style>
       .wrapper {
           display: flex;
@@ -39,10 +40,27 @@
       }
 
       .DBAccessButtons {
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        justify-content: space-evenly;
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          justify-content: center;
+      }
+
+      #toCurrentDB {
+        margin-right: 40px;
+      }
+
+      #toOneDB {
+        margin-left: 40px;
+        margin-right: 40px;
+      }
+
+      #toWordDB {
+        margin-left: 40px;
+      }
+
+      #toMain {
+        width: 160px;
       }
 
     </style>
@@ -50,34 +68,35 @@
 
   <body>
   <div class="wrapper">
-    <div class="signDatabase">
-      <div>
-          <h1>학습 데이터 조회</h1>
+    <div class = "container-fluid p-3 my-3 border bg-secondary" >
+      <div class = "container p-3 my-3 border text-white">
+          <h1 align="center">학습 데이터 조회</h1>
       </div>
 
       <div class = "DBAccessButtons">
         <form action="/signCurrentDB" method="Get">
-          <input class="btn" type="submit" id="toCurrentDB" value=" 사용중인 DB 조회 ">
+          <input class="btn border text-white btn-lg" type="submit" id="toCurrentDB" value = "사용중인 DB 조회 ">
         </form>
 
         <form action="/signOneDB" method="Get">
-          <input class="btn" type="submit" id="toOneDB" value="  한 글자 DB 조회  ">
+          <input class="btn border text-white btn-lg" type="submit" id="toOneDB" value= "한 글자 DB 조회">
         </form>
 
         <form action="/signWordDB" method="Get">
-          <input class="btn" type="submit" id="toWordDB" value="여러 글자 DB 조회">
+          <input class="btn border text-white btn-lg" type="submit" id="toWordDB" value= "여러 글자 DB 조회">
         </form>
       </div>
 
-      <div>
+      <div align="center">
         <form action="/" method="Get">
-          <input class="btn" type="submit" id="toMain" value="Back">
+          <input class="btn border text-white btn-lg" type="submit" id="toMain" value="Back">
         </form>
       </div>
-
     </div>
+
   </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src='main.js?ver=22'></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
   </body>
 </html>

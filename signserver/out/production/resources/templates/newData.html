@@ -4,6 +4,7 @@
     <head>
         <title>Create New Data in DB</title>
         <!-- <link rel="stylesheet" href="styles.css?ver=1"> -->
+        <link rel="stylesheet" href="/css/bootstrap.css">
     </head>
     <style>
         .newData {
@@ -11,11 +12,6 @@
             align-items: center;
             flex-direction: column;
             justify-content: space-evenly;
-            background-color: #C0C0C0;
-            margin:50px;
-            padding:50px;
-            width:50%;
-            height:50%;
         }
 
         .wrapper {
@@ -39,6 +35,7 @@
         }
 
         .btn {
+            width: 200px;
             margin: 10px;
             font-size: 25px;
             padding: 10px 10px;
@@ -55,18 +52,18 @@
     </style>
     <body>
     <div class="wrapper">
-        <div class="newData">
-            <div class="flex-item">
-                <h1>Create New Data</h1>
+        <div class = "container-fluid p-3 my-3 border bg-secondary" >
+            <div class = "container p-3 my-3 border text-white">
+                <h1 align="center">Create New Data</h1>
             </div>
 
-            <div class="flex-item">
+            <div class = "container p-3 col-sm-4" align="center">
                 <canvas id ='canvas' width='256' height='256'>
                     Canvas not supported
                 </canvas>
             </div>
 
-            <div class="flex-item">
+            <div class="container col-sm-4" align="center">
                 <form>
                     <input class = 'radioBtn' type = 'radio' id = 'number'
                            value ='1' name = 'classify'>
@@ -84,21 +81,22 @@
 
             <div class ="flex-item" id = "btns">
                 <div class="buttons">
-                    <button class = "btn" id = 'ClearBtn'>Screen Clear</button>
-                    <button class = "btn"  id = 'SaveBtn'>Save</button>
+                    <button class = "btn border text-white btn-lg" id = 'ClearBtn'>Screen Clear</button>
+                    <button class = "btn border text-white btn-lg"  id = 'SaveBtn'>Save</button>
 
                     <form action="dataList" method="Get">
-                        <button class = "btn" id = 'ReadBtn' type='button'>Data list</button>
+                        <button class = "btn border text-white btn-lg" id = 'ReadBtn' type='button'>Data list</button>
                     </form>
 
                     <form action="/signClassification" method="Get">
-                        <input class="btn" type="submit" id="toMain" value="Back">
+                        <input class = "btn border text-white btn-lg" type="submit" id="toMain" value="Back">
                     </form>
                 </div>
             </div>
 
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
             <script src='newData.js?ver=22'></script>
+            <script type="text/javascript" src="js/bootstrap.js"></script>
         </div>
     </div>
     </body>
