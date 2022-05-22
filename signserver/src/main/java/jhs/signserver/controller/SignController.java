@@ -197,9 +197,15 @@ public class SignController {
 
     //구현 해야함... service도 추가로
     @RequestMapping("/confirmDataDB")
-    public  String confirmData(){
+    public  String confirmDataDB(@RequestBody Object obj) throws IOException{
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonInString = mapper.writeValueAsString(obj);
+        logger.info(jsonInString);
+        byte[] bytes = convertObjectToBytes(jsonInString);
+        String s = Base64.getEncoder().encodeToString(bytes);
 
-        return null;
+        authenticationService.confirmSign(s);
+        return "redirect:/";
     }
 
     public static byte[] convertObjectToBytes(Object obj) throws IOException {

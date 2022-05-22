@@ -26,10 +26,7 @@ function InitEvent() {
     canvas          = document.getElementById('canvas');
     canvasContext   = canvas.getContext('2d');
     clearBtn        = document.getElementById('ClearBtn');
-    registerBtn     = document.getElementById('registerBtn');
     sendBtn         = document.getElementById('sendBtn');
-
-
 
     //tool = new tool_pencil();
     canvas.addEventListener('mousedown', handleWritingStart);
@@ -61,14 +58,12 @@ function handleWritingStart(event) {
   canvasContext.moveTo(mousePos.x, mousePos.y);
   canvasContext.fill();
 
-  //signData.cnt++;
   xArray.push(mousePos.x);
   yArray.push(mousePos.y);
   timeArray.push(Date.now());
   frstArray.push(0);
   state.mousedown = true;
-  //새로운 획마다 inputCnt 초기화
-  //inputCnt=0;
+
 }
 
 //서명 중
@@ -79,15 +74,12 @@ function handleWritingInProgress(event) {
     const mousePos = getMousePositionOnCanvas(event);
     canvasContext.lineTo(mousePos.x, mousePos.y);
     canvasContext.stroke();
-    //inputCnt++;
-    //if(inputCnt%8==0)
     arrayPush(event);
   }
 }
 //배열에 값 넣는 함수
 function arrayPush(event){
        const mousePos = getMousePositionOnCanvas(event);
-       //signData.cnt++;
        xArray.push(mousePos.x);
        yArray.push(mousePos.y);
        timeArray.push(Date.now());
@@ -124,22 +116,18 @@ function getMousePositionOnCanvas(event){
 
 
 function onClear() {
+    initSignData();
 	canvasContext.clearRect(0, 0, canvas.width, canvas.height);
 	canvasContext.restore();
 }
 
 var sendData = new Object();
-var sendIdx =0;
-function register(){
 
-    sendData[sendIdx++] = signData;
-    initSignData();
-    onClear();
-    alert(sendIdx + "개 사인 등록");
-}
 
 // 수정해야함
 function send() {
+
+    sendData['sign'] = signData;
 
     sendData['name']= document.getElementById('name').value;
 
@@ -149,11 +137,10 @@ function send() {
         alert("이름을 입력해주세요!")
     }
     else{
-    //수정해야함.
     $.ajax({
             type : 'post',
             url : '/confirmDataDB',
-            data : JSON.stringify(signData),
+            data : JSON.stringify(sendData),
             processData : false,
             dataType:'json',
             contentType : 'application/json',
@@ -163,16 +150,16 @@ function send() {
             }
 
     });
-    console.log(signData);
-    initSignData();
+    console.log(sendData);
+    initSendData();
     onClear();
     }
 
 }
 
 function initSendData(){
+    initSignData();
     document.getElementById('name').value="";
     delete sendData;
     sendData = new Object();
-    sendIdx=0;
 }
