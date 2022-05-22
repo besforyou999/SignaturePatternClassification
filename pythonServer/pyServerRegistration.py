@@ -14,72 +14,72 @@ import socket, threading;
 # Input: json
 # Ouput: lists
 def read_json(json):
-  
-  X = json['xPos']
-  Y = json['yPos']
-  T = json['time']
-  P = json['isFirst']
 
-  StartPoint = []
-  for idx in range(len(P)):
-      if P[idx] == 0 : StartPoint.append(idx)
+    X = json['xPos']
+    Y = json['yPos']
+    T = json['time']
+    P = json['isFirst']
 
-  return X, Y, T, P, StartPoint
+    StartPoint = []
+    for idx in range(len(P)):
+        if P[idx] == 0 : StartPoint.append(idx)
+
+    return X, Y, T, StartPoint
 
 #################################################
 # Input: lists about signature
 # Ouput: lists normalize by regular time interval
 def time_normalization(StartPoint, X, Y, T):
 
-  interval = 5 # ms 
+    interval = 5 # ms 
 
-  XT = []
-  YT = []
+    XT = []
+    YT = []
 
   # Divide by stroke
-  for i in range(len(StartPoint)):
-    s = StartPoint[i]
-    e = len(T) if i == (len(StartPoint) - 1) else StartPoint[i + 1]
+    for i in range(len(StartPoint)):
+        s = StartPoint[i]
+        e = len(T) if i == (len(StartPoint) - 1) else StartPoint[i + 1]
 
-    stroke_x = np.array(X[s:e])
-    stroke_y = np.array(Y[s:e])
-    stroke_t = np.array(T[s:e]) - T[s]
+        stroke_x = np.array(X[s:e])
+        stroke_y = np.array(Y[s:e])
+        stroke_t = np.array(T[s:e]) - T[s]
 
-    # Stroke Concatenation
-    if i != 0 :
-      stroke_x = stroke_x - stroke_x[0] + XT[-1]
-      stroke_y = stroke_y - stroke_y[0] + YT[-1]
+        # Stroke Concatenation
+        if i != 0 :
+            stroke_x = stroke_x - stroke_x[0] + XT[-1]
+            stroke_y = stroke_y - stroke_y[0] + YT[-1]
 
-    # Interpolate the stroke by time 
-    t = 0
+        # Interpolate the stroke by time 
+        t = 0
 
-    for k in range(len(stroke_t) - 1):
-      while(stroke_t[k] <= t and t < stroke_t[k+1]):
-        x = stroke_x[k] + (stroke_x[k+1] - stroke_x[k])*(t - stroke_t[k])
-        y = stroke_y[k] + (stroke_y[k+1] - stroke_y[k])*(t - stroke_t[k])
-        XT.append(x)
-        YT.append(y)
-        t = t + interval
+        for k in range(len(stroke_t) - 1):
+            while(stroke_t[k] <= t and t < stroke_t[k+1]):
+                x = stroke_x[k] + (stroke_x[k+1] - stroke_x[k])*(t - stroke_t[k])
+                y = stroke_y[k] + (stroke_y[k+1] - stroke_y[k])*(t - stroke_t[k])
+                XT.append(x)
+                YT.append(y)
+                t = t + interval
 
-    if stroke_t[-1] == t:
-      XT.append(stroke_x[-1])
-      YT.append(stroke_y[-1])
-    
-  return XT, YT
+        if stroke_t[-1] == t:
+            XT.append(stroke_x[-1])
+            YT.append(stroke_y[-1])
+        
+    return XT, YT
 
 #################################################
 # Input: lists of X-axis and Y-axis
 # Ouput: lists of derivative
 def get_derivative(X, Y):
   
-  X1 = []
-  Y1 = []
+    X1 = []
+    Y1 = []
 
-  for i in range(len(X) - 1) :
-    X1.append(X[i+1] - X[i])
-    Y1.append(Y[i+1] - Y[i])
+    for i in range(len(X) - 1) :
+        X1.append(X[i+1] - X[i])
+        Y1.append(Y[i+1] - Y[i])
 
-  return X1, Y1
+    return X1, Y1
 
 #################################################
 # Input: (list)1st derivative of X-axis and Y-axis, 2nd derivative of X-axis and Y-axis
@@ -197,7 +197,7 @@ def make_histogram(X1, Y1, X2, Y2):
 # Input: json 
 # Output: histogram vector about signature feature
 def preprocess_json(json):
-  
+
     X, Y, T, StartPoint = read_json(json)
 
     XT, YT = time_normalization(StartPoint, X, Y, T)
@@ -212,6 +212,7 @@ def preprocess_json(json):
 # Input: list of histogram vectors about signature features
 # Output: quantization step vector (quantization step == standard deviation of histogram vectors)
 def calc_user_Q(dataset):
+
     M = np.mean(dataset, axis=0)
     b = 1.5
     S = np.zeros(len(dataset[1]))
@@ -230,6 +231,7 @@ def calc_user_Q(dataset):
 #         mean score of histogram vectors in dataset
 #         standard deviation of scores
 def calc_user_Fu(dataset, Q, len_abs):
+
     r_ep = 0.8
     a_ep = 0.002
 
@@ -257,6 +259,7 @@ def save2db(jsonObj):
 
     name = jsonObj['name']
     mydb = mysql.connector.connect(
+        #host="127.0.0.1",
         host="18.207.156.28",
         user="root",
         passwd="root",
@@ -276,6 +279,7 @@ def save2db(jsonObj):
 
     dataset = []
     len_abs = 104
+    
     for i in range(len(jsonObj)-1):
         F = preprocess_json(jsonObj[str(i)])
         dataset.append(F)
@@ -285,8 +289,8 @@ def save2db(jsonObj):
     Fu, m, d = calc_user_Fu(dataset, Q, len_abs)
 
     data_json = OrderedDict()
-    data_json["Q"] = Q
-    data_json["Fu"] = Fu
+    data_json["Q"] = Q.tolist()
+    data_json["Fu"] = Fu.tolist()
     data_json["mean"] = m
     data_json["std"] = d
     sql = (
@@ -333,8 +337,10 @@ def binder(client_socket, addr):
             jsonObject = json.loads(msg)
             try:
                 result = save2db(jsonObject)
+                print("Success to save!")
             except:
                 result = 0
+                print("Fail to save...")
 
             # respond to str
             respond = str(result)
