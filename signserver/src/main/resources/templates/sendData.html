@@ -4,6 +4,7 @@
     <head>
         <title>Send Data to AI Model</title>
         <!-- <link rel="stylesheet" href="styles.css?ver=1"> -->
+        <link rel="stylesheet" href="/css/bootstrap.css">
         <style>
              .wrapper {
                 display: flex;
@@ -38,33 +39,42 @@
             .buttons {
               display: flex;
               flex-direction: row;
-              justify-content: space-evenly;
+              justify-content: center;
             }
 
             .btn {
+                width: 200px;
                 margin: 10px;
                 font-size: 25px;
                 padding: 10px 10px;
+            }
+
+            #ClearBtn {
+                margin-left: 15px;
+            }
+
+            #sendBtn {
+                margin-right: 15px;
             }
 
         </style>
     </head>
     <body>
         <div class="wrapper">
-            <div class="sendData">
-                <div class="flex-item">
-                    <h1>Send Data</h1>
+            <div class = "container-fluid p-3 my-3 border bg-secondary" >
+                <div class = "container p-3 my-3 border text-white">
+                    <h1 align="center">Send Data</h1>
                 </div>
 
-                <div class="flex-item">
+                <div class = "container p-3 col-sm-4" align="center">
                   <canvas id ='canvas' width='256' height='256'>
                     Canvas not supported
                   </canvas>
                 </div>
 
                 <div class="buttons">
-                    <button class = "btn" id = 'ClearBtn'>Screen Clear</button>
-                    <button class = "btn" id = 'sendBtn'>Send</button>
+                    <button class = "btn border text-white btn-lg" id = 'ClearBtn'>Screen Clear</button>
+                    <button class = "btn border text-white btn-lg" id = 'sendBtn'>Send</button>
                 </div>
 
                 <div class="flex-item">
@@ -82,6 +92,7 @@
 
                 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
                 <script src='sendData.js?ver=22'></script>
+                <script type="text/javascript" src="js/bootstrap.js"></script>
             </div>
         </div>
     </body>

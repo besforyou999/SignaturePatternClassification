@@ -9,23 +9,23 @@
     </head>
     <body>
         <div class="wrapper">
-            <div class="mainPanel">
-                <div class="container p-3 my-3 border">
+            <div class="container-fluid p-3 my-3 border bg-secondary" >
+                <div class="container p-3 my-3 border text-white">
                     <h1 align="center"> Welcome to JHS A.I Main Page</h1>
                     <h3 align="center"> Select what to do</h3>
                 </div>
 
                 <div class="mainBtn">
                     <form action="/signClassification" method="post">
-                        <input class="btn" type="submit" id="classification" value="서명 분류">
+                        <input class="btn border text-white btn-lg" type="submit" id="classification" value="서명 분류">
                     </form>
 
                     <form action="/signAuthentication" method="post">
-                        <input class="btn" type="submit" id="authentication" value="서명 인식">
+                        <input class="btn border text-white btn-lg" type="submit" id="authentication" value="서명 인식">
                     </form>
 
                     <form action="/signDatabase" method="post">
-                        <input class="btn" type="submit" id="database" value="데이터 확인">
+                        <input class="btn border text-white btn-lg" type="submit" id="database" value="데이터 확인">
                     </form>
                 </div>
             </div>
