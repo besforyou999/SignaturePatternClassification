@@ -1,5 +1,6 @@
 package jhs.signserver.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jhs.signserver.domain.Sign;
 import jhs.signserver.domain.SignOne;
 import jhs.signserver.domain.SignWord;
@@ -85,7 +86,7 @@ public class SignController {
 
     @RequestMapping("/saveImage")
     public String saveImage(@RequestParam(value="file") MultipartFile [] file ) {
-        
+
         byte[] bytes = null;
         try {
             bytes = file[0].getBytes();
@@ -115,7 +116,7 @@ public class SignController {
 
         // img type
         sign.setLabel(Integer.parseInt(number));
-  
+
         signService.register(sign);
 
         return "redirect:/";
@@ -145,22 +146,22 @@ public class SignController {
             return "Error!";
         }
         else{
-           int num =Integer.parseInt(frModel);
-           String result;
-           switch (num){
-               case 0:
-                   result="Number";
-                   break;
-               case 1:
-                   result = "Korean";
-                   break;
-               case 2:
-                   result = "English";
-                   break;
-               default:
-                   result = "No exist result";
-           }
-           return result;
+            int num =Integer.parseInt(frModel);
+            String result;
+            switch (num){
+                case 0:
+                    result="Number";
+                    break;
+                case 1:
+                    result = "Korean";
+                    break;
+                case 2:
+                    result = "English";
+                    break;
+                default:
+                    result = "No exist result";
+            }
+            return result;
         }
     }
     @RequestMapping("/deleteSign")
@@ -184,8 +185,10 @@ public class SignController {
 
     @RequestMapping("/registerDataDB")
     public String registerData(@RequestBody Object obj) throws IOException {
-        logger.info(obj.toString());
-        byte[] bytes = convertObjectToBytes(obj);
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonInString = mapper.writeValueAsString(obj);
+        logger.info(jsonInString);
+        byte[] bytes = convertObjectToBytes(jsonInString);
         String s = Base64.getEncoder().encodeToString(bytes);
         authenticationService.registerSign(s);
 
