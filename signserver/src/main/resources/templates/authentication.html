@@ -4,6 +4,7 @@
   <head>
     <title>JHS AI Authentication</title>
     <!-- <link rel="stylesheet" href="styles.css?ver=1"> -->
+    <link rel="stylesheet" href="/css/bootstrap.css">
     <style>
       .authentication {
         display: flex;
@@ -28,10 +29,11 @@
       .buttons {
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: center;
       }
 
       .btn {
+          width: 340px;
           margin: 30px;
           font-size: 25px;
           padding: 10px 10px;
@@ -41,25 +43,26 @@
   </head>
   <body>
     <div class="wrapper">
-      <div class="authentication">
-        <div class="flex-item">
-          <h1> Authentication </h1>
+      <div class="container-fluid p-3 my-3 border bg-secondary" >
+        <div class="container p-3 my-3 border text-white">
+          <h1 align="center"> Authentication </h1>
         </div>
         <div class="buttons">
           <form action="/registerData" method="post">
-            <input class="btn" type="submit" id="registerData" value="Personal Sign Register Page">
+            <input class="btn border text-white btn-lg" type="submit" id="registerData" value="Personal Sign Register Page">
           </form>
 
           <form action="/confirmData" method="post">
-            <input class="btn" type="submit" id="confirmData" value="Personal Confirm Page">
+            <input class="btn border text-white btn-lg" type="submit" id="confirmData" value="Personal Confirm Page">
           </form>
 
           <form action="/" method="Get">
-            <input class="btn" type="submit" id="toMain" value="Back">
+            <input class="btn border text-white btn-lg" type="submit" id="toMain" value="Back">
           </form>
         </div>
       </div>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
   </body>
 </html>
