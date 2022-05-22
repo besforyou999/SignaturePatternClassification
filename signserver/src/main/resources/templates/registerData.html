@@ -36,11 +36,12 @@
                 margin: 10px;
                 font-size: 25px;
                 padding: 10px 10px;
+
             }
 
             #name {
-                width: 200px;
-                height : 30px;
+                width: 240px;
+                height : 50px;
                 font-size: 25px;
             }
 
@@ -48,32 +49,32 @@
     </head>
     <body>
         <div class="wrapper">
-            <div class="registerData">
-                <div class="flex-item">
-                    <h1>Personal Sign Register Page</h1>
+            <div class = "container-fluid p-3 my-3 border bg-secondary" align="center">
+                <div class = "container p-3 my-3 border text-white">
+                    <h1 align="center">Personal Sign Register Page</h1>
                 </div>
 
-                <div class="flex-item">
+                <div class = "container p-3 col-sm-4" align="center">
                     <canvas id ='canvas' width='256' height='256'>
                         Canvas not supported
                     </canvas>
                 </div>
 
                 <div class="flex-item">
-                    <button class = "btn" id = 'ClearBtn'>Screen Clear</button>
-                    <button class = "btn" id = 'registerBtn'>Register</button>
+                    <button class = "btn border text-white btn-lg" id = 'ClearBtn'>Screen Clear</button>
+                    <button class = "btn border text-white btn-lg" id = 'registerBtn'>Register</button>
                 </div>
 
-                <div class="flex-item">
+                <div>
                     <input type="text" id="name" name="nameInput"
                            placeholder="이름(한글 혹은 영어)"
                            oninput="this.value = this.value.replace(/[^ㄱ-힣a-zA-Z]/g, '')">
-                    <button class = "btn" id = 'sendBtn'>Send</button>
+                    <button class = "btn border text-white btn-lg" id = 'sendBtn'>Send</button>
                 </div>
 
                 <div class="flex-item">
                     <form action="/signAuthentication" method="Get">
-                        <input class="btn" type="submit" id="toAuthentication" value="Back">
+                        <input class="btn border text-white btn-lg" type="submit" id="toAuthentication" value="Back">
                     </form>
                 </div>
             </div>
