@@ -4,6 +4,7 @@
 <head>
   <title>JHS AI Classification</title>
   <!-- <link rel="stylesheet" href="classification.css?ver=1"> -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
   <style>
     .classification {
       margin:20px;
@@ -24,7 +25,8 @@
     }
 
     .btn {
-        margin: 40px;
+        width: 200px;
+        margin: 10px;
         font-size: 30px;
         padding: 10px 10px;
     }
@@ -41,23 +43,26 @@
 </head>
 <body>
   <div class="wrapper">
-    <div class="classification">
-      <h1> Classification </h1>
+    <div class="container-fluid p-3 my-3 border bg-secondary" >
+      <div class="container p-3 my-3 border text-white">
+        <h1 align="center"> Classification </h1>
+      </div>
 
       <div class="buttons">
         <form action="/newData" method="post">
-          <input class="btn" type="submit" id="createData" value="데이터 생성">
+          <input class="btn border text-white btn-lg" type="submit" id="createData" value="데이터 생성">
         </form>
 
         <form action="/sendData" method="post">
-          <input class="btn" type="submit" id="sendData" value="데이터 전송">
+          <input class="btn border text-white btn-lg" type="submit" id="sendData" value="데이터 전송">
         </form>
 
         <form action="/" method="Get">
-          <input class="btn" type="submit" id="toMain" value="Back">
+          <input class="btn border text-white btn-lg" type="submit" id="toMain" value="Back">
         </form>
       </div>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script type="text/javascript" src="js/bootstrap.js"></script>
     </div>
   </div>
 </body>
