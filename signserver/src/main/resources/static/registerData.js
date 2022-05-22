@@ -125,6 +125,7 @@ function getMousePositionOnCanvas(event){
 
 
 function onClear() {
+    initSignData();
 	canvasContext.clearRect(0, 0, canvas.width, canvas.height);
 	canvasContext.restore();
 }
