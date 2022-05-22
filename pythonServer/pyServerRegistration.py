@@ -6,7 +6,6 @@ import math
 import mysql.connector
 import numpy as np
 import socket, threading;
-from tensorflow.keras.models import load_model
 #from PIL import Image
 #import io
 #import glob
@@ -258,8 +257,7 @@ def save2db(jsonObj):
 
     name = jsonObj['name']
     mydb = mysql.connector.connect(
-        #host="18.207.156.28",
-        host="127.0.0.1",
+        host="18.207.156.28",
         user="root",
         passwd="root",
         database="jhs"
