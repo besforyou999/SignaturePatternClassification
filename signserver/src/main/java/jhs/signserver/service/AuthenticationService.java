@@ -14,7 +14,7 @@ import java.nio.ByteOrder;
 @Transactional
 public class AuthenticationService {
 
-    public void registerSign(String encoded_str) {
+    public String registerSign(String encoded_str) {
         try (Socket client = new Socket()) {
             InetSocketAddress ipep = new InetSocketAddress("", 9990);
 
@@ -43,17 +43,18 @@ public class AuthenticationService {
 
                receiver.read(data, 0, length);
 
-                encoded_str = new String(data, "UTF-8");
-
+               encoded_str = new String(data, "UTF-8");
+                return encoded_str;
 
             }
         } catch (Throwable e) {
             e.printStackTrace();
+            return null;
         }
     }
 
 
-    public void confirmSign(String encoded_str){
+    public String confirmSign(String encoded_str){
         try (Socket client = new Socket()) {
             InetSocketAddress ipep = new InetSocketAddress("", 9980);
 
@@ -84,10 +85,12 @@ public class AuthenticationService {
 
                 encoded_str = new String(data, "UTF-8");
 
+                return encoded_str;
 
             }
         } catch (Throwable e) {
             e.printStackTrace();
+            return null;
         }
     }
 }

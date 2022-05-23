@@ -193,9 +193,11 @@ public class SignController {
         logger.info(jsonInString);
         byte[] bytes = convertObjectToBytes(jsonInString);
         String s = Base64.getEncoder().encodeToString(bytes);
-        authenticationService.registerSign(s);
 
-        return "redirect:/";
+        String result = convertRegisterResult( authenticationService.registerSign(s));
+
+
+        return result;
     }
 
     //구현 해야함... service도 추가로
@@ -206,9 +208,55 @@ public class SignController {
         logger.info(jsonInString);
         byte[] bytes = convertObjectToBytes(jsonInString);
         String s = Base64.getEncoder().encodeToString(bytes);
-        authenticationService.confirmSign(s);
 
-        return "redirect:/";
+        String result = convertConfirmResult(authenticationService.confirmSign(s));
+
+        return result;
+    }
+
+    public String convertRegisterResult(String frModel){
+        if(frModel == null){
+            return "Error!";
+        }
+        else{
+            int num =Integer.parseInt(frModel);
+            String result;
+            switch (num){
+                case -1:
+                    result="이미 등록된 이름입니다.";
+                case 0:
+                    result="등록 실패";
+                    break;
+                case 1:
+                    result = "등록 성공";
+                    break;
+                default:
+                    result = "No exist result";
+            }
+            return result;
+        }
+    }
+    public String convertConfirmResult(String frModel){
+
+        if(frModel == null){
+            return "Error!";
+        }
+        else{
+            int num =Integer.parseInt(frModel);
+            String result;
+            switch (num){
+                case 0:
+                    result="인증 실패";
+                    break;
+                case 1:
+                    result = "인증 성공";
+                    break;
+                default:
+                    result = "No exist result";
+            }
+            return result;
+        }
+
     }
 
     public static byte[] convertObjectToBytes(Object obj) throws IOException {
