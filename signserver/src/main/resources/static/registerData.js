@@ -164,7 +164,8 @@ function send() {
             contentType : 'application/json',
             async : false,
             success : function (rslt) {
-                alert("서버로 전송");
+                   $('#result').text(rslt);
+                alert(rslt);
             }
 
     });
