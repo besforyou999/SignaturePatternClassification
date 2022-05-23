@@ -255,7 +255,7 @@ def calc_user_Fu(dataset, Q, len_abs):
 #################################################
 # Input: json about user signatures
 # Output: success or failure of DB save
-def save2db(jsonObj):
+def verify_signature(jsonObj):
 
     name = jsonObj['name']
     mydb = mysql.connector.connect(
@@ -267,40 +267,36 @@ def save2db(jsonObj):
     )
     cur = mydb.cursor()
     sql = (
-        "SELECT * "
+        "SELECT user_name, data "
         "FROM user_information "
         "WHERE user_name = %s;"
     )
     data = (name,)
     cur.execute(sql, data)
-    result = cur.fetchone()
-    if cur.rowcount != 0:
+    select_result = cur.fetchone()
+    # return -1 when user_name is not exist
+    if cur.rowcount != 1:
         return -1
 
-    dataset = []
     len_abs = 104
+    r_ep = 0.8
+    a_ep = 0.002 
     
-    for i in range(len(jsonObj)-1):
-        F = preprocess_json(jsonObj[str(i)])
-        dataset.append(F)
+    F = preprocess_json(jsonObj['sign'])    # ndarray
 
-    dataset = np.array(dataset)
-    Q = calc_user_Q(dataset)
-    Fu, m, d = calc_user_Fu(dataset, Q, len_abs)
+    userJsonObj = json.loads(select_result[1])
+    Q = np.array(userJsonObj['Q'])
+    Fu = np.array(userJsonObj['Fu'])
+    m = userJsonObj['mean']
+    d = userJsonObj['std']
 
-    data_json = OrderedDict()
-    data_json["Q"] = Q.tolist()
-    data_json["Fu"] = Fu.tolist()
-    data_json["mean"] = m
-    data_json["std"] = d
-    sql = (
-        "INSERT INTO user_information(user_name, data)"
-        "VALUES (%s, %s);"
-    )
-    data = (name, json.dumps(data_json, ensure_ascii=False))
-    cur.execute(sql, data)
-    mydb.commit()
+    Ft = F / np.concatenate([Q[:-len_abs] + r_ep, Q[-len_abs:] + a_ep])
+    score = np.sum(np.absolute(Ft - Fu))
+
     cur.close()
+    thres_hold = m + 20
+    if score > thres_hold :
+        return 0
 
     return 1
 
@@ -336,11 +332,11 @@ def binder(client_socket, addr):
 
             jsonObject = json.loads(msg)
             try:
-                result = save2db(jsonObject)
-                print("Success to save!")
+                result = verify_signature(jsonObject)
+                print("Success to authorizing process!")
             except:
                 result = 0
-                print("Fail to save...")
+                print("Fail to authorizing process...")
 
             # respond to str
             respond = str(result)
@@ -370,7 +366,7 @@ server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 # 서버는 복수 ip를 사용하는 pc의 경우는 ip를 지정하고 그렇지 않으면 None이 아닌 ''로 설정한다.
 # 포트는 pc내에서 비어있는 포트를 사용한다. cmd에서 netstat -an | find "LISTEN"으로 확인할 수 있다.
-server_socket.bind(('', 9990))
+server_socket.bind(('', 9980))
 # server 설정이 완료되면 listen를 시작한다.
 server_socket.listen()
 
