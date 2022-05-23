@@ -142,7 +142,7 @@ function send() {
             url : '/confirmDataDB',
             data : JSON.stringify(sendData),
             processData : false,
-            dataType:'json',
+            dataType:'text',
             contentType : 'application/json',
             async : false,
             success : function (rslt) {
