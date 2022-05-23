@@ -200,7 +200,7 @@ public class SignController {
         return result;
     }
 
-    //구현 해야함... service도 추가로
+    @ResponseBody
     @RequestMapping("/confirmDataDB")
     public  String confirmDataDB(@RequestBody Object obj) throws IOException{
         ObjectMapper mapper = new ObjectMapper();
