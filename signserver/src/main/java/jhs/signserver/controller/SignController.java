@@ -185,7 +185,7 @@ public class SignController {
         return "redirect:/";
     }
 
-
+    @ResponseBody
     @RequestMapping("/registerDataDB")
     public String registerData(@RequestBody Object obj) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
