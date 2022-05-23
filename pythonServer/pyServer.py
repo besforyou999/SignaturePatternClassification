@@ -8,7 +8,7 @@ import glob
 
 # Load keras model
 print("= Load model")
-model = load_model('test.h5')
+model = load_model('word_letter_classifier.h5')
 
 def save_img_as_png(msg):
     image = base64.b64decode(msg)
@@ -46,12 +46,14 @@ def binder(client_socket, addr):
             img = Image.open('test.png')
             
             # img resize
-            width = 64
-            height = 64
-            img_resize = img.resize((width,height))
+            #width = 64
+            #height = 64
+            width = 256
+            height = 256
+            #img_resize = img.resize((width,height))
 
             new_col = []
-            imgArray = np.array(img_resize)    
+            imgArray = np.array(img)    
             
             print("imgArray : " , imgArray.shape)
 

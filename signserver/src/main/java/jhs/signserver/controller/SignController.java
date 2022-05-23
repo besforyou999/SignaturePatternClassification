@@ -81,6 +81,7 @@ public class SignController {
 
     @RequestMapping("/returnToMain")
     public String returnToMain(Model model) throws Exception {
+
         return "redirect:/";
     }
 
@@ -171,6 +172,7 @@ public class SignController {
 
         List<Sign> list = signService.findSigns();
         model.addAttribute("list", list);
+
         return "dataList";
     }
 
@@ -179,6 +181,7 @@ public class SignController {
         signService.changeSignLable(Integer.parseInt(label), Long.parseLong(id));
         List<Sign> list = signService.findSigns();
         model.addAttribute("list", list);
+
         return "redirect:/";
     }
 
@@ -203,8 +206,8 @@ public class SignController {
         logger.info(jsonInString);
         byte[] bytes = convertObjectToBytes(jsonInString);
         String s = Base64.getEncoder().encodeToString(bytes);
-
         authenticationService.confirmSign(s);
+
         return "redirect:/";
     }
 
