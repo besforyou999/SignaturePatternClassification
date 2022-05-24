@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jhs.signserver.domain.Sign;
 import jhs.signserver.domain.SignOne;
 import jhs.signserver.domain.SignWord;
+import jhs.signserver.domain.UserSign;
 import jhs.signserver.service.AuthenticationService;
 import jhs.signserver.service.ClientService;
 import jhs.signserver.service.SignService;
@@ -77,6 +78,14 @@ public class SignController {
         model.addAttribute("list", list);
 
         return "showDBList";
+    }
+
+    @GetMapping("userListDB")
+    public String getUserListDB(Model model) throws Exception{
+        List<UserSign> list = signService.getUserList();
+        model.addAttribute("list",list);
+
+        return "showUserList";
     }
 
     @RequestMapping("/returnToMain")

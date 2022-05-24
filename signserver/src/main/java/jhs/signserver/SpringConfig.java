@@ -2,6 +2,7 @@ package jhs.signserver;
 
 import jhs.signserver.repository.JpaSignRepository;
 import jhs.signserver.repository.SignRepository;
+import jhs.signserver.repository.UserSignRepository;
 import jhs.signserver.service.SignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,7 @@ public class SpringConfig {
 
     @Bean
     public SignService signService(){
-        return new SignService(signRepository());
+        return new SignService(signRepository(),userSignRepository());
     }
 
     @Bean
@@ -32,4 +33,6 @@ public class SpringConfig {
         return new JpaSignRepository(em);
     }
 
+    @Bean
+    public UserSignRepository userSignRepository() { return new UserSignRepository(em);}
 }

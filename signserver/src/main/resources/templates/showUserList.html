@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>User DB 데이터</title>
+
+  <style>
+            .backBtn {
+                font-size: 20px;
+                margin-top: 5px;
+                margin-bottom: 20px;
+            }
+
+            .dropDownList {
+                font-size: 20px;
+            }
+
+            .saveBtn {
+                font-size: 20px;
+            }
+
+            .deleteBtn {
+                font-size: 20px;
+            }
+            .btn {
+                margin: 10px;
+                font-size: 20px;
+                padding: 10px 10px;
+            }
+        </style>
+
+</head>
+<body>
+<h1>User DB 데이터</h1>
+
+
+<form action="/signDatabase" method="Get">
+  <input class="btn" type="submit" id="back" value="Back">
+</form>
+
+
+<table border="1">
+  <th width="100px">Index</th>
+  <th width="100px">User Id</th>
+
+  <tr align="center" height="200px" th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
+    <td th:text='${list.getId()}'></td>
+    <td th:text='${list.getUserName()}'></td>
+
+  </tr>
+  <tr th:unless="${#lists.size(list)} > 0">
+    <td colspan="4">조회된 결과가 없습니다</td>
+  </tr>
+</table>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+</body>
+</html>
