@@ -3,7 +3,9 @@ package jhs.signserver.service;
 import jhs.signserver.domain.Sign;
 import jhs.signserver.domain.SignOne;
 import jhs.signserver.domain.SignWord;
+import jhs.signserver.domain.UserSign;
 import jhs.signserver.repository.SignRepository;
+import jhs.signserver.repository.UserSignRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -13,9 +15,10 @@ import java.util.Optional;
 public class SignService {
 
     private final SignRepository signRepository ;
-
-    public SignService(SignRepository signRepository) {
+    private final UserSignRepository userSignRepository;
+    public SignService(SignRepository signRepository, UserSignRepository userSignRepository) {
         this.signRepository = signRepository;
+        this.userSignRepository= userSignRepository;
     }
 
     // 사인 등록
@@ -27,13 +30,14 @@ public class SignService {
     public List<Sign> findSigns(){
         return signRepository.findAll();
     }
-
     public List<SignOne> getSignOneDB(){
         return signRepository.getSignOneDB();
     }
     public List<SignWord> getSignWordDB(){
         return signRepository.getSignWordDB();
     }
+
+    public List<UserSign> getUserList(){ return userSignRepository.findAll();}
 
     public Optional<Sign> findOne(Long signId){
         return signRepository.findById(signId);

@@ -67,8 +67,8 @@
 
                 <div>
                     <input type="text" id="name" name="nameInput"
-                           placeholder="이름(한글 혹은 영어)"
-                           oninput="this.value = this.value.replace(/[^ㄱ-힣a-zA-Z]/g, '')">
+                           placeholder="id(영문+숫자)"
+                           oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')">
                     <button class = "btn border text-white btn-lg" id = 'sendBtn'>Send</button>
                 </div>
 
