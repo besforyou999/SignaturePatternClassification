@@ -54,8 +54,6 @@ public class SignController {
         return "dataList";
     }
 
-
-
     @GetMapping("/signCurrentDB")
     public String getCurrentDB(Model model) throws Exception {
         List<Sign> list = signService.findSigns();

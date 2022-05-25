@@ -1,84 +1,68 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>DB 데이터 List</title>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>DB 데이터 List</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <style>
+        .backBtn {
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
 
-  <style>
-            .backBtn {
-                font-size: 20px;
-                margin-top: 5px;
-                margin-bottom: 20px;
-            }
+        .dropDownList {
+            font-size: 20px;
+        }
 
-            .dropDownList {
-                font-size: 20px;
-            }
+        .saveBtn {
+            font-size: 20px;
+        }
 
-            .saveBtn {
-                font-size: 20px;
-            }
-
-            .deleteBtn {
-                font-size: 20px;
-            }
-            .btn {
-                margin: 10px;
-                font-size: 20px;
-                padding: 10px 10px;
-            }
-        </style>
-
-</head>
-<body>
-<h1>DB 데이터 List</h1>
+        .deleteBtn {
+            font-size: 20px;
+        }
+        .btn {
+            margin: 10px;
+            font-size: 20px;
+            padding: 10px 10px;
+        }
 
 
-<form action="/signDatabase" method="Get">
-  <input class="btn" type="submit" id="back" value="Back">
-</form>
+    </style>
+  </head>
 
+  <body>
+    <div class="container-fluid p-3 my-3 border bg-secondary">
+      <h1 align="center">DB 데이터 List</h1>
+    </div>
 
-<table border="1">
-  <th width="100px">Id</th>
-  <th width="100px">Label</th>
-  <th width="200px">Creation Data</th>
-  <th width="300px">Data</th>
+    <form action="/signDatabase" method="Get">
+      <input class="btn border" type="submit" id="back" value="Back">
+    </form>
+    <div class ="tablebody" align="center">
+      <table border="1">
+        <th width="100px" style="text-align:center">Id</th>
+        <th width="100px" style="text-align:center">Label</th>
+        <th width="200px" style="text-align:center">Creation Data</th>
+        <th width="300px" style="text-align:center">Data</th>
 
-  <tr align="center" height="200px" th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
-    <td th:text='${list.getId()}'></td>
-    <td th:text='${list.getLabel()}'></td>
-    <td th:text='${list.getCreated()}'></td>
-    <td><img th:src='${list.getData()}' width="150px" height="150px"></td>
+        <tr class="container border border-dark" align="center" height="200px" th:if="${#lists.size(list)} > 0" th:each="list : ${list}" >
+          <td th:text='${list.getId()}' class="border border-dark" ></td>
+          <td th:text='${list.getLabel()}' class="border border-dark"></td>
+          <td th:text='${list.getCreated()}' class="border border-dark"></td>
+          <td><img th:src='${list.getData()}' width="150px" height="150px" class="border border-dark"></td>
+        </tr>
 
-  </tr>
-  <tr th:unless="${#lists.size(list)} > 0">
-    <td colspan="4">조회된 결과가 없습니다</td>
-  </tr>
-</table>
+        <tr th:unless="${#lists.size(list)} > 0">
+          <td colspan="4">조회된 결과가 없습니다</td>
+        </tr>
+      </table>
+    </div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src='dataList.js?ver=11'></script>
-
-</body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src='dataList.js?ver=11'></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+  </body>
 </html>
-
-
-<!-- <th width="150px">Delete</th>
- <th width="150px">Label change</th>
- <th width="150px">Save changes</th>-->
-
-
-<!-- <td><button type="button" name="deleteBtn" class="deleteBtn"
-              th:attr="onclick=|deleteImg('${list.getId()}')|">Delete</button></td>
-  <td>
-    <select class="dropDownList" th:id="${list.getId()}" >
-      <option value="none">라벨 변경</option>
-      <option value="0">unknown</option>
-      <option value="1">Number</option>
-      <option value="2">Korean</option>
-      <option value="3">English</option>
-    </select>
-  </td>
-  <td><button type="button" name="saveBtn" class ="saveBtn"
-              th:attr="onclick=|saveChangeLabel('${list.getId()}')|"/>Save</td>-->
