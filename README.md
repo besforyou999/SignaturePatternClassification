@@ -16,7 +16,7 @@
 
 > Languages : Java, Python, HTML, CSS, JavaScript(ES6) <br>
 
-> Library & Framwork : Spring, Thymeleaf, BootStrap <br>
+> Library & Framwork : Spring, Thymeleaf, BootStrap, Ajax <br>
 
 > Database : MariaDB <br>
 
