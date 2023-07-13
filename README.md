@@ -12,14 +12,35 @@
 > https://www.youtube.com/watch?v=B5Is-N6cj9g
 <br>
 
-### Tech Stack
+<div align="center">
 
-> Languages : Java, Python, HTML, CSS, JavaScript(ES6) <br>
+## Tech Stack
 
-> Library & Framwork : Spring, Thymeleaf, BootStrap, Ajax <br>
+Languages <br>
 
-> Database : MariaDB <br>
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black"/></a>
+<img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white"/></a>
 
-> Server : AWS EC2 <br>
+<br>
 
+Library & Framwork <br>
 
+<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white"/></a>
+
+<br>
+
+Database <br>
+
+<img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white"/></a>
+
+<br>
+
+Server <br>
+
+<img src="https://img.shields.io/badge/Amazon_AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white"/></a>
+
+</div>
